@@ -78,4 +78,14 @@ public class TestAlphaCiv {
     // Matchers may be combined, like is-not
     assertThat(l.get(0), is(not("Bumse")));
   }
+
+  @Test
+  public void tileOneZeroIsOcean()
+  {
+    Position ocean_tile = new Position(1,0);
+    assertThat(game.getTileAt(ocean_tile), is(nullValue()));
+  }
+
+
 }
+
