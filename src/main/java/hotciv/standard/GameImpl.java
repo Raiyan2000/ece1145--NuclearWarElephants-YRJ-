@@ -46,6 +46,8 @@ public class GameImpl implements Game {
     }
 
     world_board[1][0].setTypeString(GameConstants.OCEANS);
+    world_board[0][1].setTypeString(GameConstants.HILLS);
+    world_board[2][2].setTypeString(GameConstants.MOUNTAINS);
 
   }
 

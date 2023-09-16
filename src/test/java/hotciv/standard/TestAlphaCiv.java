@@ -86,6 +86,20 @@ public class TestAlphaCiv {
     assertThat(game.getTileAt(ocean_tile_pos).getTypeString(), is(GameConstants.OCEANS));
   }
 
+  @Test
+  public void tileZeroOneIsHills()
+  {
+    Position hills_tile_pos = new Position(0,1);
+    assertThat(game.getTileAt(hills_tile_pos).getTypeString(), is(GameConstants.HILLS));
+  }
+
+  @Test
+  public void tileTwoTwoIsMountains()
+  {
+    Position mountain_tile_pos = new Position(2,2);
+    assertThat(game.getTileAt(mountain_tile_pos).getTypeString(), is(GameConstants.MOUNTAINS));
+  }
+
 
 }
 
