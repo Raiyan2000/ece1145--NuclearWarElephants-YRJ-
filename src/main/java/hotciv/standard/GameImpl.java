@@ -30,12 +30,16 @@ import hotciv.framework.*;
 */
 
 public class GameImpl implements Game {
-
+  //Created Player Red and Blue
   private Player player_red = Player.RED;
   private Player player_blue = Player.BLUE;
+
+  //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
   public GameImpl(){
+
+    //Sets the World board to plains
     for(int i = 0; i < GameConstants.WORLDSIZE; i++)
     {
       for(int j = 0; j < GameConstants.WORLDSIZE; j++)
@@ -44,7 +48,7 @@ public class GameImpl implements Game {
 
       }
     }
-
+    //Sets certain parts to be ocean, hills and mountains
     world_board[1][0].setTypeString(GameConstants.OCEANS);
     world_board[0][1].setTypeString(GameConstants.HILLS);
     world_board[2][2].setTypeString(GameConstants.MOUNTAINS);
