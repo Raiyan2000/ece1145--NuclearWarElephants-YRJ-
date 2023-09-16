@@ -10,13 +10,12 @@ public class TileImpl implements Tile{
      * engine, as they correspond to named image files.
      * @return the tile type as string
      */
-
+    
     private String tile_type;
 
     public TileImpl(String name){
         tile_type = name;
     }
-
 
     public String getTypeString() {
         return tile_type;
