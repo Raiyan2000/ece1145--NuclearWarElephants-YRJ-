@@ -13,6 +13,11 @@ public class TileImpl implements Tile{
 
     private String tile_type;
 
+    public TileImpl(String name){
+        tile_type = name;
+    }
+
+
     public String getTypeString() {
         return tile_type;
     }

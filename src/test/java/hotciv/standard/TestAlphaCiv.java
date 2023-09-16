@@ -82,8 +82,8 @@ public class TestAlphaCiv {
   @Test
   public void tileOneZeroIsOcean()
   {
-    Position ocean_tile = new Position(1,0);
-    assertThat(game.getTileAt(ocean_tile), is(nullValue()));
+    Position ocean_tile_pos = new Position(1,0);
+    assertThat(game.getTileAt(ocean_tile_pos).getTypeString(), is(GameConstants.OCEANS));
   }
 
 

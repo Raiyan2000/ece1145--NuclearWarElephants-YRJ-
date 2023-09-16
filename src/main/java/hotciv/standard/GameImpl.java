@@ -33,8 +33,25 @@ public class GameImpl implements Game {
 
   private Player player_red = Player.RED;
   private Player player_blue = Player.BLUE;
+  private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public Tile getTileAt( Position p ) { return null; }
+  public GameImpl(){
+    for(int i = 0; i < GameConstants.WORLDSIZE; i++)
+    {
+      for(int j = 0; j < GameConstants.WORLDSIZE; j++)
+      {
+        world_board[i][j] = new TileImpl(GameConstants.PLAINS);
+
+      }
+    }
+
+    world_board[1][0].setTypeString(GameConstants.OCEANS);
+
+  }
+
+  public Tile getTileAt( Position p ) {
+    return world_board[p.getRow()][p.getColumn()];
+  }
   public Unit getUnitAt( Position p ) { return null; }
   public City getCityAt( Position p ) { return null; }
   public Player getPlayerInTurn() { return null; }
