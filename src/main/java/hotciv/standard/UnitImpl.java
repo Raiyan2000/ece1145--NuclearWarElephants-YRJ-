@@ -3,15 +3,16 @@ package hotciv.standard;
 import hotciv.framework.*;
 public class UnitImpl implements Unit {
 
+    private String unit_type;
+    private Player owner;
+
     public String getTypeString(){
-        return null;
+        return unit_type;
     }
 
 
-
-    public Player getOwner()
-    {
-        return null;
+    public Player getOwner() {
+        return owner;
     }
 
 

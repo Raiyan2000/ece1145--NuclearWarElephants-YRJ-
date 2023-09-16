@@ -100,6 +100,13 @@ public class TestAlphaCiv {
     assertThat(game.getTileAt(mountain_tile_pos).getTypeString(), is(GameConstants.MOUNTAINS));
   }
 
+  @Test
+  public void RedHasOneArcher()
+  {
+
+    //assertThat(game.getTileAt(mountain_tile_pos).getTypeString(), is(GameConstants.MOUNTAINS));
+  }
+
 
 }
 
