@@ -31,6 +31,12 @@ Responsibilities:
 
 */
 public interface City {
+
+  public int getProductionAmount();
+  public void setWorkFocus(String troop);
+  public void incrementProductionPerRound();
+  public void setOwnerCity(Player name);
+
   /** return the owner of this city.
    * @return the player that controls this city.
    */

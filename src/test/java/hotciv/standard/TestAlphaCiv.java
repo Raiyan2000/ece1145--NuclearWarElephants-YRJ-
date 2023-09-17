@@ -104,9 +104,64 @@ public class TestAlphaCiv {
   public void RedHasOneArcher()
   {
     Position archer_pos = new Position(2, 0);
-    //assertThat(game.getUnitAt(archer_pos), is(GameConstants.ARCHER));
+    assertThat(game.getUnitAt(archer_pos).getTypeString(), is(GameConstants.ARCHER));
   }
 
+  @Test
+  public void RedHasOneSettler()
+  {
+    Position archer_pos = new Position(4, 3);
+    assertThat(game.getUnitAt(archer_pos).getTypeString(), is(GameConstants.SETTLER));
+  }
+
+  @Test
+  public void BlueHasOneLegion()
+  {
+    Position archer_pos = new Position(3, 2);
+    assertThat(game.getUnitAt(archer_pos).getTypeString(), is(GameConstants.LEGION));
+  }
+
+  @Test
+  public void RedHasCityOnTileOneOne()
+  {
+    Position city_pos = new Position(1, 1);
+    assertThat(game.getCityAt(city_pos), is(notNullValue()));
+    assertThat(game.getCityAt(city_pos).getOwner(), is(Player.RED));
+  }
+  @Test
+  public void BlueHasCityOnTileFourOne()
+  {
+    Position city_pos = new Position(4,1);
+    assertThat(game.getCityAt(city_pos), is(notNullValue()));
+    assertThat(game.getCityAt(city_pos).getOwner(), is(Player.BLUE));
+  }
+  @Test
+  public void CityHasPopulationSizeOne()
+  {
+    Position city_pos = new Position(4,1);
+    Position city_pos_two = new Position(1,1);
+
+    assertThat(game.getCityAt(city_pos).getSize(), is(1));
+    assertThat(game.getCityAt(city_pos_two).getSize(), is(1));
+  }
+
+  @Test
+  public void CityProduceSixProductionPerRound()
+  {
+    Position city_pos = new Position(4,1);
+    Position city_pos_two = new Position(1,1);
+
+    assertThat(game.getCityAt(city_pos).getProductionAmount(), is(0));
+    assertThat(game.getCityAt(city_pos_two).getProductionAmount(), is(0));
+
+    //Mimic end of round
+    game.setCurrentPlayerInTurn(Player.BLUE);
+    game.endOfTurn();
+
+    assertThat(game.getCityAt(city_pos).getProductionAmount(), is(6));
+    assertThat(game.getCityAt(city_pos_two).getProductionAmount(), is(6));
+  }
+  
   @Test
   public void AttackUnitMovesToNewTile()
   {

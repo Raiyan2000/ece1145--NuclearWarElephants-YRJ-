@@ -30,6 +30,8 @@ package hotciv.framework;
 
 public interface Game {
   // === Accessor methods ===================================
+
+  public void setCurrentPlayerInTurn(Player name);
   
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.

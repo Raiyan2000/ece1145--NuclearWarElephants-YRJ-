@@ -15,9 +15,12 @@ public class TileImpl implements Tile{
 
     private Unit unit;
 
+    private City city;
+
     public TileImpl(String name){
         tile_type = name;
         unit = null;
+        city = null;
     }
 
     public void setUnitType(Unit type)
@@ -25,8 +28,17 @@ public class TileImpl implements Tile{
         unit = type;
     }
 
+    public void setCityOwner(Player name){
+        City temp_city = new CityImpl(name, null);
+        city = temp_city;
+    }
+
     public Unit getUnit(){
         return unit;
+    }
+
+    public City getCity(){
+        return city;
     }
 
     public String getTypeString() {

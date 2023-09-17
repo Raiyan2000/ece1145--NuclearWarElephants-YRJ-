@@ -33,6 +33,7 @@ public class GameImpl implements Game {
   //Created Player Red and Blue
   private Player player_red = Player.RED;
   private Player player_blue = Player.BLUE;
+
   private Player current_player_turn;
 
   //Initialized  World board as an array
@@ -64,22 +65,31 @@ public class GameImpl implements Game {
     //Blue has one Legion
     UnitImpl legion = new UnitImpl(GameConstants.LEGION, player_blue);
 
-    //Set units int world tiles
+    //Set units in world tiles
     world_board[2][0].setUnitType(archer);
     world_board[3][2].setUnitType(legion);
     world_board[4][3].setUnitType(settler);
 
+    //Set city owners
+    world_board[1][1].setCityOwner(player_red);
+    world_board[4][1].setCityOwner(player_blue);
 
+
+  }
+
+  public void setCurrentPlayerInTurn(Player name){
+    current_player_turn = name;
   }
 
   public Tile getTileAt( Position p ) {
     return world_board[p.getRow()][p.getColumn()];
   }
-  public Unit getUnitAt( Position p )
-  {
+  public Unit getUnitAt( Position p ) {
     return world_board[p.getRow()][p.getColumn()].getUnit();
   }
-  public City getCityAt( Position p ) { return null; }
+  public City getCityAt( Position p ) {
+    return world_board[p.getRow()][p.getColumn()].getCity();
+  }
   public Player getPlayerInTurn() {
     return current_player_turn;
   }
@@ -105,7 +115,7 @@ public class GameImpl implements Game {
 
         return true;
       }
-      else if(landType.equals(GameConstants.HILLS) || landType.equals(GameConstants.MOUNTAINS) || landType.equals(GameConstants.OCEANS))
+      else if(landType.equals(GameConstants.MOUNTAINS) || landType.equals(GameConstants.OCEANS))
       {
         return false; //cannot move to this type of terrain
       }
@@ -125,7 +135,28 @@ public class GameImpl implements Game {
       return false; //move was unsuccessful
     }
   }
-  public void endOfTurn() {}
+  public void endOfTurn() {
+
+    if(current_player_turn == Player.RED) {
+      current_player_turn = Player.BLUE;
+    } else if(current_player_turn == Player.BLUE) {
+
+      //Increment production in cities after round is over
+      for(int i = 0; i < GameConstants.WORLDSIZE; i++)
+      {
+        for(int j = 0; j < GameConstants.WORLDSIZE; j++)
+        {
+          if(world_board[i][j].getCity() != null)
+          {
+            world_board[i][j].getCity().incrementProductionPerRound();
+          }
+
+        }
+      }
+
+      current_player_turn = Player.RED;
+    }
+  }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p ) {}
