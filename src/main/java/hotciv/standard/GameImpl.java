@@ -70,16 +70,13 @@ public class GameImpl implements Game {
     world_board[4][3].setUnitType(settler);
 
 
-
-
-
-
   }
 
   public Tile getTileAt( Position p ) {
     return world_board[p.getRow()][p.getColumn()];
   }
-  public Unit getUnitAt( Position p ) {
+  public Unit getUnitAt( Position p )
+  {
     return world_board[p.getRow()][p.getColumn()].getUnit();
   }
   public City getCityAt( Position p ) { return null; }
@@ -88,11 +85,49 @@ public class GameImpl implements Game {
   }
   public Player getWinner() { return null; }
   public int getAge() { return 0; }
-  public boolean moveUnit( Position from, Position to ) {
-    return false;
+  public boolean moveUnit( Position from, Position to )
+  {
+    //check to make sure unit exists at the starting position
+    Unit initialUnit = world_board[from.getRow()][from.getColumn()].getUnit();
+
+    if(initialUnit != null)
+    {
+      //get terrain type of tile to be moved to
+      String landType = world_board[to.getRow()][to.getColumn()].getTypeString();
+
+      //check if there is a defending unit at the new position
+      if(world_board[to.getRow()][to.getColumn()].getUnit() != null) {
+        //there is a defending unit, but attacking wins, so replace defending unit w/ attacking unit
+        world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+
+        //remove attacking unit from previous tile
+        world_board[from.getRow()][from.getColumn()].setUnitType(null);
+
+        return true;
+      }
+      else if(landType.equals(GameConstants.HILLS) || landType.equals(GameConstants.MOUNTAINS) || landType.equals(GameConstants.OCEANS))
+      {
+        return false; //cannot move to this type of terrain
+      }
+      else //case where terrain can be moved to and it is empty
+      {
+        //move unit to new location
+        world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+
+        //remove unit from old location
+        world_board[from.getRow()][from.getColumn()].setUnitType(null);
+
+        return true;
+      }
+    }
+    else
+    {
+      return false; //move was unsuccessful
+    }
   }
   public void endOfTurn() {}
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p ) {}
+
 }

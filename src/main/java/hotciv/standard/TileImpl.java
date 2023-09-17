@@ -20,7 +20,8 @@ public class TileImpl implements Tile{
         unit = null;
     }
 
-    public void setUnitType(Unit type){
+    public void setUnitType(Unit type)
+    {
         unit = type;
     }
 

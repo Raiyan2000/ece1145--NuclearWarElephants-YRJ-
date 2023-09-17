@@ -107,5 +107,14 @@ public class TestAlphaCiv {
     //assertThat(game.getUnitAt(archer_pos), is(GameConstants.ARCHER));
   }
 
+  @Test
+  public void AttackUnitMovesToNewTile()
+  {
+    Position attackPosition = new Position(2,0);
+    Position endPosition = new Position(2,1);
+    //assertThat(game.getUnitAt(attackPosition),is("archer"));
+    assertThat(game.moveUnit(attackPosition,endPosition), is(true));
+  }
+
 }
 
