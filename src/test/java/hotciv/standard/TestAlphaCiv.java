@@ -103,10 +103,9 @@ public class TestAlphaCiv {
   @Test
   public void RedHasOneArcher()
   {
-
-    //assertThat(game.getTileAt(mountain_tile_pos).getTypeString(), is(GameConstants.MOUNTAINS));
+    Position archer_pos = new Position(2, 0);
+    //assertThat(game.getUnitAt(archer_pos), is(GameConstants.ARCHER));
   }
-
 
 }
 

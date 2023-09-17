@@ -33,6 +33,7 @@ public class GameImpl implements Game {
   //Created Player Red and Blue
   private Player player_red = Player.RED;
   private Player player_blue = Player.BLUE;
+  private Player current_player_turn;
 
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
@@ -53,14 +54,38 @@ public class GameImpl implements Game {
     world_board[0][1].setTypeString(GameConstants.HILLS);
     world_board[2][2].setTypeString(GameConstants.MOUNTAINS);
 
+    // First turn: Player Red
+    current_player_turn = player_red;
+
+    //Red has one archer and settler
+    UnitImpl archer = new UnitImpl(GameConstants.ARCHER, player_red);
+    UnitImpl settler = new UnitImpl(GameConstants.SETTLER, player_red);
+
+    //Blue has one Legion
+    UnitImpl legion = new UnitImpl(GameConstants.LEGION, player_blue);
+
+    //Set units int world tiles
+    world_board[2][0].setUnitType(archer);
+    world_board[3][2].setUnitType(legion);
+    world_board[4][3].setUnitType(settler);
+
+
+
+
+
+
   }
 
   public Tile getTileAt( Position p ) {
     return world_board[p.getRow()][p.getColumn()];
   }
-  public Unit getUnitAt( Position p ) { return null; }
+  public Unit getUnitAt( Position p ) {
+    return world_board[p.getRow()][p.getColumn()].getUnit();
+  }
   public City getCityAt( Position p ) { return null; }
-  public Player getPlayerInTurn() { return null; }
+  public Player getPlayerInTurn() {
+    return current_player_turn;
+  }
   public Player getWinner() { return null; }
   public int getAge() { return 0; }
   public boolean moveUnit( Position from, Position to ) {

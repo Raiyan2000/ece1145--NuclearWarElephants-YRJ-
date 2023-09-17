@@ -13,13 +13,26 @@ public class TileImpl implements Tile{
 
     private String tile_type;
 
+    private Unit unit;
+
     public TileImpl(String name){
         tile_type = name;
+        unit = null;
+    }
+
+    public void setUnitType(Unit type){
+        unit = type;
+    }
+
+    public Unit getUnit(){
+        return unit;
     }
 
     public String getTypeString() {
         return tile_type;
     }
+
+
     public void setTypeString(String type){
         tile_type = type;
     }

@@ -6,6 +6,11 @@ public class UnitImpl implements Unit {
     private String unit_type;
     private Player owner;
 
+    public UnitImpl(String troop_type, Player name) {
+        unit_type = troop_type;
+        owner = name;
+    }
+
     public String getTypeString(){
         return unit_type;
     }

@@ -40,4 +40,6 @@ public interface Tile {
   public String getTypeString();
 
   public void setTypeString(String type);
+
+  public Unit getUnit();
 }
