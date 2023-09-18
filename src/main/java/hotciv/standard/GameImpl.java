@@ -36,10 +36,14 @@ public class GameImpl implements Game {
 
   private Player current_player_turn;
 
+  //current year variable
+  private int age;
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
   public GameImpl(){
+    //game age starts at 4000
+    age = 4000;
 
     //Sets the World board to plains
     for(int i = 0; i < GameConstants.WORLDSIZE; i++)
@@ -93,8 +97,11 @@ public class GameImpl implements Game {
   public Player getPlayerInTurn() {
     return current_player_turn;
   }
-  public Player getWinner() { return null; }
-  public int getAge() { return 0; }
+  public Player getWinner() { if (this.getAge() == 3000) {return Player.RED; } else { return null; } }
+  public int getAge() { return age; }
+
+  public void setAge(int x) { age = x; }
+
   public boolean moveUnit( Position from, Position to )
   {
     //check to make sure unit exists at the starting position
@@ -136,11 +143,12 @@ public class GameImpl implements Game {
     }
   }
   public void endOfTurn() {
-
     if(current_player_turn == Player.RED) {
       current_player_turn = Player.BLUE;
     } else if(current_player_turn == Player.BLUE) {
-
+      //round is over at this point
+      //increment year by 100 after each round
+      age-=100;
       //Increment production in cities after round is over
       for(int i = 0; i < GameConstants.WORLDSIZE; i++)
       {

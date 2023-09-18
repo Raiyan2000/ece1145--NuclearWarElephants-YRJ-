@@ -171,5 +171,33 @@ public class TestAlphaCiv {
     assertThat(game.moveUnit(attackPosition,endPosition), is(true));
   }
 
+  @Test
+  public void yearStarts4000()
+  {
+    assertThat(game.getAge(), is(4000));
+  }
+
+  @Test
+  public void yearIncrements100()
+  {
+    //Mimic end of round
+    game.setCurrentPlayerInTurn(Player.BLUE);
+    game.endOfTurn();
+
+    assertThat(game.getAge(), is(3900));
+  }
+
+  @Test
+  public void redWinsAge3000()
+  {
+    //set game to year 3000BC
+    game.setAge(3000);
+
+    assertThat(game.getAge(), is(3000));
+
+
+    assertThat(game.getWinner(), is(Player.RED));
+  }
+
 }
 

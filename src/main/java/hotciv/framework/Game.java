@@ -72,8 +72,10 @@ public interface Game {
    * age BC (-4000 equals 4000 BC) while positive numbers are AD.
    *  @return world age.
    */
-  public int getAge();  
-    
+  public int getAge();
+
+  public void setAge(int x);
+
   // === Mutator methods ======================================
   
   /** move a unit from one position to another. If that other position
