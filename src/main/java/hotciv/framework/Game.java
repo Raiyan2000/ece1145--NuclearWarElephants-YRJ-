@@ -32,6 +32,7 @@ public interface Game {
   // === Accessor methods ===================================
 
   public void setCurrentPlayerInTurn(Player name);
+  public void test_setUnitPosition(Position pos, Unit troop);
   
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.

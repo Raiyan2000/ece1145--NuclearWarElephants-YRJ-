@@ -10,28 +10,67 @@ public class CityImpl implements City{
 
     private String work_focus;
 
-    private int production_of_city;
+    private String unit_production;
+
+    private int treasury_of_city;
+
+    private int production_cost;
+
 
 
     public CityImpl(Player name, String workFocus) {
         owner_city = name;
         population_size = 1;
-        production_of_city = 0;
-        workFocus = null;
         work_focus = workFocus;
+        unit_production = null;
+        treasury_of_city = 0;
+        calculateProductionCost();
     }
 
     public void incrementProductionPerRound(){
-        production_of_city += 6;
+        treasury_of_city += 6;
     }
 
-    public void setWorkFocus(String troop){
-        work_focus = troop;
+    public void setWorkFocus(String type){
+        work_focus = type;
     }
 
     public void setOwnerCity(Player name){
         owner_city = name;
     }
+
+    public void setProductionType(String unit){
+        unit_production = unit;
+    }
+
+    public void calculateProductionCost(){
+
+        if(unit_production == GameConstants.ARCHER)
+        {
+            production_cost = 10;
+        }
+        else if(unit_production == GameConstants.LEGION)
+        {
+            production_cost = 15;
+        }
+        else if(unit_production == GameConstants.SETTLER)
+        {
+            production_cost = 30;
+        }
+        else
+        {
+            production_cost = 0;
+        }
+    }
+
+    public void setTreasury(int amount){
+        treasury_of_city = amount;
+    }
+
+    public int getProductionCost(){
+        return production_cost;
+    }
+
     public Player getOwner(){
         return owner_city;
     }
@@ -42,17 +81,14 @@ public class CityImpl implements City{
 
 
     public int getTreasury() {
-        return 0;
+        return treasury_of_city;
     }
 
 
     public String getProduction() {
-        return null;
+        return unit_production;
     }
 
-    public int getProductionAmount(){
-        return production_of_city;
-    }
     public String getWorkforceFocus(){
         return work_focus;
     }

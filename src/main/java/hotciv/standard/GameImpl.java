@@ -42,6 +42,7 @@ public class GameImpl implements Game {
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
   public GameImpl(){
+
     //game age starts at 4000
     age = 4000;
 
@@ -83,6 +84,10 @@ public class GameImpl implements Game {
 
   public void setCurrentPlayerInTurn(Player name){
     current_player_turn = name;
+  }
+
+  public void test_setUnitPosition(Position pos, Unit troop){
+    world_board[pos.getRow()][pos.getColumn()].setUnitType(troop);
   }
 
   public Tile getTileAt( Position p ) {
@@ -149,18 +154,39 @@ public class GameImpl implements Game {
       //round is over at this point
       //increment year by 100 after each round
       age-=100;
-      //Increment production in cities after round is over
+      //Round is over loop for cities
       for(int i = 0; i < GameConstants.WORLDSIZE; i++)
       {
         for(int j = 0; j < GameConstants.WORLDSIZE; j++)
         {
           if(world_board[i][j].getCity() != null)
           {
+            //Increment production of cities by 6
             world_board[i][j].getCity().incrementProductionPerRound();
+
+            //Check if city has enough treasury to produce specified unit
+            if(world_board[i][j].getCity().getTreasury() > world_board[i][j].getCity().getProductionCost() && world_board[i][j].getCity().getWorkforceFocus() == GameConstants.productionFocus)
+            {
+              // Create new unit
+              Unit new_unit = new UnitImpl(world_board[i][j].getCity().getProduction(), world_board[i][j].getCity().getOwner());
+
+              //Place unit in proper tile depending on other units placement
+              if(world_board[i][j].getUnit() == null)
+              {
+                world_board[i][j].setUnitType(new_unit);
+              }
+              else {
+                world_board[i][j+1].setUnitType(new_unit);
+              }
+
+              //Deduct unit cost from Treasury of city
+              world_board[i][j].getCity().setTreasury(world_board[i][j].getCity().getTreasury() - new_unit.getUnitCost());
+            }
           }
 
         }
       }
+
 
       current_player_turn = Player.RED;
     }

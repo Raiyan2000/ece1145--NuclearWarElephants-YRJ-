@@ -151,16 +151,24 @@ public class TestAlphaCiv {
     Position city_pos = new Position(4,1);
     Position city_pos_two = new Position(1,1);
 
-    assertThat(game.getCityAt(city_pos).getProductionAmount(), is(0));
-    assertThat(game.getCityAt(city_pos_two).getProductionAmount(), is(0));
+    assertThat(game.getCityAt(city_pos).getTreasury(), is(0));
+    assertThat(game.getCityAt(city_pos_two).getTreasury(), is(0));
 
     //Mimic end of round
     game.setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
-    assertThat(game.getCityAt(city_pos).getProductionAmount(), is(6));
-    assertThat(game.getCityAt(city_pos_two).getProductionAmount(), is(6));
+    assertThat(game.getCityAt(city_pos).getTreasury(), is(6));
+    assertThat(game.getCityAt(city_pos_two).getTreasury(), is(6));
   }
+
+  @Test
+  public void playerSelectProduceOfCity()
+  {
+
+  }
+
+
   
   @Test
   public void AttackUnitMovesToNewTile()
@@ -197,6 +205,67 @@ public class TestAlphaCiv {
 
 
     assertThat(game.getWinner(), is(Player.RED));
+  }
+
+  @Test
+  public void cityProducesProperUnit()
+  {
+    Position city_of_red = new Position(1,1);
+
+    game.getCityAt(city_of_red).setTreasury(100);
+
+    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
+    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
+    game.getCityAt(city_of_red).calculateProductionCost();
+
+    //Mimic end of round
+    game.setCurrentPlayerInTurn(Player.BLUE);
+    game.endOfTurn();
+
+    assertThat(game.getUnitAt(city_of_red).getTypeString(), is(GameConstants.ARCHER));
+  }
+
+  @Test
+  public void cityProducesUnitAtProperTile()
+  {
+    Position city_of_red = new Position(1,1);
+    Position pos_of_newUnit = new Position(1, 2);
+
+    game.getCityAt(city_of_red).setTreasury(100);
+
+    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
+    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
+    game.getCityAt(city_of_red).calculateProductionCost();
+
+    Unit temp = new UnitImpl(GameConstants.LEGION, Player.RED);
+
+    game.test_setUnitPosition(city_of_red, temp);
+
+    //Mimic end of round
+    game.setCurrentPlayerInTurn(Player.BLUE);
+    game.endOfTurn();
+
+    assertThat(game.getUnitAt(pos_of_newUnit).getTypeString(), is(GameConstants.ARCHER));
+  }
+
+  @Test
+  public void unitCostDeductedFromTreasury()
+  {
+    Position city_of_red = new Position(1,1);
+
+    game.getCityAt(city_of_red).setTreasury(100);
+
+    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
+    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
+    game.getCityAt(city_of_red).calculateProductionCost();
+
+    assertThat(game.getCityAt(city_of_red).getTreasury(), is(100));
+
+    //Mimic end of round
+    game.setCurrentPlayerInTurn(Player.BLUE);
+    game.endOfTurn();
+
+    assertThat(game.getCityAt(city_of_red).getTreasury(), is(96));
   }
 
 }
