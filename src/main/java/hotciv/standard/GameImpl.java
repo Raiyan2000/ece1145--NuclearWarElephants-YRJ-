@@ -29,6 +29,7 @@ import hotciv.framework.*;
 
 */
 
+//This is the hotfix for Release 2.1
 
 public class GameImpl implements Game {
   //Created Player Red and Blue
