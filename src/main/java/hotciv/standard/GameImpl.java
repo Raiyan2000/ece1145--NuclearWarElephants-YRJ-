@@ -92,6 +92,10 @@ public class GameImpl implements Game {
     world_board[pos.getRow()][pos.getColumn()].setUnitType(troop);
   }
 
+  public void checkAdjacentCityTiles(int x, int y) {
+    return;
+  }
+
   public Tile getTileAt( Position p ) {
     return world_board[p.getRow()][p.getColumn()];
   }
