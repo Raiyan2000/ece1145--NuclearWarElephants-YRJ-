@@ -42,7 +42,7 @@ public class TestAlphaCiv {
   /** Fixture for alphaciv testing. */
   @Before
   public void setUp() {
-    game = new GameImpl(new AlphaCivWorld());
+    game = new GameImpl(GameConstants.alphaCiv);
   }
 
   // FRS p. 455 states that 'Red is the first player to take a turn'.
@@ -162,14 +162,6 @@ public class TestAlphaCiv {
     assertThat(game.getCityAt(city_pos_two).getTreasury(), is(6));
   }
 
-  @Test
-  public void playerSelectProduceOfCity()
-  {
-
-  }
-
-
-  
   @Test
   public void AttackUnitMovesToNewTile()
   {

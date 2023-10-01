@@ -40,15 +40,51 @@ public class TestWorldLayout {
     private WorldLayout layout_delta;
     private WorldLayout layout_alpha;
 
+    private TileImpl[][] alpha_tile= new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+    private TileImpl[][] delta_tile= new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+
     /** Fixture for WorldLayout testing. */
     @Before
     public void setUp() {
-        TileImpl[][] alpha_tile= new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
-        TileImpl[][] delta_tile= new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
         layout_delta = new DeltaCivWorld();
-        layout_delta.createWorld(alpha_tile);
-        layout_alpha = new AlphaCivWorld();
         layout_delta.createWorld(delta_tile);
+        layout_alpha = new AlphaCivWorld();
+        layout_alpha.createWorld(alpha_tile);
+    }
+
+
+    @Test
+    public void BlueHasCityOnTileFourOneAtAlphaCiv() {
+        assertThat(alpha_tile[4][1].getCity(), is(notNullValue()));
+        assertThat(alpha_tile[4][1].getCity().getOwner(), is(Player.BLUE));
+    }
+
+    @Test
+    public void RedHasCityOnTileOneOneAtAlphaCiv() {
+        assertThat(alpha_tile[1][1].getCity(), is(notNullValue()));
+        assertThat(alpha_tile[1][1].getCity().getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void tileTwoTwoIsMountainsAtAlphaCiv() {
+        assertThat(alpha_tile[2][2].getTypeString(), is(GameConstants.MOUNTAINS));
+    }
+
+    @Test
+    public void RedHasCityAtTileEightTwelveAtDeltaCiv() {
+        assertThat(delta_tile[8][12].getCity(), is(notNullValue()));
+        assertThat(delta_tile[8][12].getCity().getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void BlueHasCityAtTileFourFiveAtDeltaCiv() {
+        assertThat(delta_tile[4][5].getCity(), is(notNullValue()));
+        assertThat(delta_tile[4][5].getCity().getOwner(), is(Player.BLUE));
+    }
+
+    @Test
+    public void TileZeroZeroIsOceansAtDeltaCiv() {
+        assertThat(delta_tile[0][0].getTypeString(), is(GameConstants.OCEANS));
     }
 }
 

@@ -35,7 +35,9 @@ public interface Game {
   public void test_setUnitPosition(Position pos, Unit troop);
 
   public void checkAdjacentCityTiles(int x, int y);
-  
+
+  public String getGameType();
+
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.
    * @param p the position in the world that must be returned.

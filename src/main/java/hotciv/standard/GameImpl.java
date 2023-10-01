@@ -42,10 +42,12 @@ public class GameImpl implements Game {
   //current year variable
   private int age;
 
+  private String game_type;
+
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(WorldLayout world_type){
+  public GameImpl(String game_version){
 
     //game age starts at 4000
     age = 4000;
@@ -54,9 +56,21 @@ public class GameImpl implements Game {
     current_player_turn = Player.RED;
 
     // Set World Layout
-    world_layout = world_type;
-    world_layout.createWorld(world_board);
+    game_type = game_version;
+    if(game_type == GameConstants.deltaCiv) {
+      world_layout = new DeltaCivWorld();
+      world_layout.createWorld(world_board);
+    }
+    else{
+      world_layout = new AlphaCivWorld();
+      world_layout.createWorld(world_board);
+    }
 
+
+  }
+
+  public String getGameType() {
+    return game_type;
   }
 
   public void setCurrentPlayerInTurn(Player name){
