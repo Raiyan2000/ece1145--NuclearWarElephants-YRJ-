@@ -40,7 +40,7 @@ public class TestWorldLayout {
     private WorldLayout layout_delta;
     private WorldLayout layout_alpha;
 
-    /** Fixture for alphaciv testing. */
+    /** Fixture for WorldLayout testing. */
     @Before
     public void setUp() {
         TileImpl[][] alpha_tile= new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
