@@ -48,7 +48,7 @@ public class TestDeltaCiv {
     // FRS p. 455 states that 'Red is the first player to take a turn'.
     @Test
     public void test() {
-        
+
 
     }
 
