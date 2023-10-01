@@ -43,11 +43,12 @@ public class GameImpl implements Game {
   private int age;
 
   private String game_type;
+  private UnitActionStrategy UnitMovement;
 
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(String game_version){
+  public GameImpl(String game_version,UnitActionStrategy UnitAction){
 
     //game age starts at 4000
     age = 4000;
@@ -66,6 +67,7 @@ public class GameImpl implements Game {
       world_layout.createWorld(world_board);
     }
 
+    UnitMovement = UnitAction;
 
   }
 
@@ -188,6 +190,20 @@ public class GameImpl implements Game {
   }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
-  public void performUnitActionAt( Position p ) {}
+  public void performUnitActionAt( Position p )
+  {
+    //obtains unit present at the current tile
+    Unit currUnit = world_board[p.getRow()][p.getColumn()].getUnit();
+
+    if(currUnit.getTypeString() == GameConstants.SETTLER)
+    {
+      UnitMovement.SettlerUnitAction(world_board,p,currUnit);
+    }
+
+    if(currUnit.getTypeString() == GameConstants.ARCHER)
+    {
+      UnitMovement.ArcherUnitAction(currUnit);
+    }
+  }
 
 }

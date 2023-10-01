@@ -74,4 +74,8 @@ public interface City {
    */
   public String getWorkforceFocus();
 
+  public void setPopulation(int people);
+
+  public int getPopulation();
+
 }

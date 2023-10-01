@@ -92,4 +92,14 @@ public class CityImpl implements City{
     public String getWorkforceFocus(){
         return work_focus;
     }
+
+    public void setPopulation(int people)
+    {
+        population_size = people;
+    }
+
+    public int getPopulation()
+    {
+        return population_size;
+    }
 }
