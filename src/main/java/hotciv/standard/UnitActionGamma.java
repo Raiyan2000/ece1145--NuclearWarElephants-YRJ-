@@ -4,7 +4,7 @@ import hotciv.framework.*;
 
 public class UnitActionGamma implements UnitActionStrategy
 {
-    public void ArcherUnitAction(Position a, Unit archer_unit)
+    public void ArcherUnitAction(Unit archer_unit)
     {
         //get current defensive strength
         int currStrength = archer_unit.getDefensiveStrength();

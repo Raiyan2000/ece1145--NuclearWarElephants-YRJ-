@@ -42,7 +42,7 @@ public class TestDeltaCiv {
     /** Fixture for alphaciv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl(GameConstants.deltaCiv);
+        game = new GameImpl(new DeltaCivWorld(), new UnitActionAlpha());
     }
 
     // FRS p. 455 states that 'Red is the first player to take a turn'.

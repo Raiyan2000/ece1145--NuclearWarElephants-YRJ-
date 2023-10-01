@@ -2,9 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class UnitActionAlpha implements UnitActionStrategy
-{
-    public void ArcherUnitAction(Position a, Unit u){}
+public class UnitActionAlpha implements UnitActionStrategy {
+    public void ArcherUnitAction(Unit u){}
 
-    public void SettlerUnitAction(Position p, Unit u){}
+    public void SettlerUnitAction(TileImpl[][] board,Position p, Unit u){}
 }

@@ -48,7 +48,7 @@ public class GameImpl implements Game {
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(String game_version,UnitActionStrategy UnitAction){
+  public GameImpl(WorldLayout world_type, UnitActionStrategy UnitAction){
 
     //game age starts at 4000
     age = 4000;
@@ -57,15 +57,8 @@ public class GameImpl implements Game {
     current_player_turn = Player.RED;
 
     // Set World Layout
-    game_type = game_version;
-    if(game_type == GameConstants.deltaCiv) {
-      world_layout = new DeltaCivWorld();
-      world_layout.createWorld(world_board);
-    }
-    else{
-      world_layout = new AlphaCivWorld();
-      world_layout.createWorld(world_board);
-    }
+    world_layout = world_type;
+    world_layout.createWorld(world_board);
 
     UnitMovement = UnitAction;
 
