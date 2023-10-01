@@ -35,52 +35,27 @@ public class GameImpl implements Game {
   //Created Player Red and Blue
   private Player player_red = Player.RED;
   private Player player_blue = Player.BLUE;
-
   private Player current_player_turn;
+
+  private WorldLayout world_layout;
 
   //current year variable
   private int age;
+
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(){
+  public GameImpl(WorldLayout world_type){
 
     //game age starts at 4000
     age = 4000;
 
-    //Sets the World board to plains
-    for(int i = 0; i < GameConstants.WORLDSIZE; i++)
-    {
-      for(int j = 0; j < GameConstants.WORLDSIZE; j++)
-      {
-        world_board[i][j] = new TileImpl(GameConstants.PLAINS);
-
-      }
-    }
-    //Sets certain parts to be ocean, hills and mountains
-    world_board[1][0].setTypeString(GameConstants.OCEANS);
-    world_board[0][1].setTypeString(GameConstants.HILLS);
-    world_board[2][2].setTypeString(GameConstants.MOUNTAINS);
-
     // First turn: Player Red
-    current_player_turn = player_red;
+    current_player_turn = Player.RED;
 
-    //Red has one archer and settler
-    UnitImpl archer = new UnitImpl(GameConstants.ARCHER, player_red);
-    UnitImpl settler = new UnitImpl(GameConstants.SETTLER, player_red);
-
-    //Blue has one Legion
-    UnitImpl legion = new UnitImpl(GameConstants.LEGION, player_blue);
-
-    //Set units in world tiles
-    world_board[2][0].setUnitType(archer);
-    world_board[3][2].setUnitType(legion);
-    world_board[4][3].setUnitType(settler);
-
-    //Set city owners
-    world_board[1][1].setCityOwner(player_red);
-    world_board[4][1].setCityOwner(player_blue);
-
+    // Set World Layout
+    world_layout = world_type;
+    world_layout.createWorld(world_board);
 
   }
 

@@ -42,15 +42,45 @@ public class TestDeltaCiv {
     /** Fixture for alphaciv testing. */
     @Before
     public void setUp() {
-        game = new GameImpl();
+        game = new GameImpl(new DeltaCivWorld());
     }
 
     // FRS p. 455 states that 'Red is the first player to take a turn'.
     @Test
-    public void test() {
-
-
+    public void RedHasCityAtTileEightTwelve() {
+        Position city_pos = new Position(8,12);
+        assertThat(game.getCityAt(city_pos), is(notNullValue()));
+        assertThat(game.getCityAt(city_pos).getOwner(), is(Player.RED));
     }
+
+    @Test
+    public void BlueHasCityAtTileFourFive() {
+        Position city_pos = new Position(4,5);
+        assertThat(game.getCityAt(city_pos), is(notNullValue()));
+        assertThat(game.getCityAt(city_pos).getOwner(), is(Player.BLUE));
+    }
+
+    @Test
+    public void TileZeroZeroIsOceans() {
+        Position ocean_pos = new Position(0,0);
+        assertThat(game.getTileAt(ocean_pos).getTypeString(), is(GameConstants.OCEANS));
+    }
+
+    @Test
+    public void TileZeroFiveIsMountains() {
+        Position mountain_pos = new Position(0,5);
+        assertThat(game.getTileAt(mountain_pos).getTypeString(), is(GameConstants.MOUNTAINS));
+    }
+
+    @Test
+    public void TileOneThreeIsHills() {
+        Position hill_pos = new Position(1,3);
+        assertThat(game.getTileAt(hill_pos).getTypeString(), is(GameConstants.HILLS));
+    }
+
+
+
+
 
 }
 
