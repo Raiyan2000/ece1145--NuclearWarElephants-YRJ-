@@ -20,6 +20,7 @@ public class UnitImpl implements Unit {
         if(troop_type == GameConstants.ARCHER)
         {
             unit_cost = 10;
+            defensive_stats = 4;
         }
         else if(troop_type == GameConstants.LEGION)
         {
@@ -58,7 +59,7 @@ public class UnitImpl implements Unit {
 
     public int getDefensiveStrength()
     {
-        return 0;
+        return defensive_stats;
     }
 
     public void setDefensiveStrength(int defense)

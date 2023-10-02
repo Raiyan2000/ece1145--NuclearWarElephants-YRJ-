@@ -188,12 +188,12 @@ public class GameImpl implements Game {
     //obtains unit present at the current tile
     Unit currUnit = world_board[p.getRow()][p.getColumn()].getUnit();
 
-    if(currUnit.getTypeString() == GameConstants.SETTLER)
+    if(currUnit.getTypeString().equals(GameConstants.SETTLER))
     {
       UnitMovement.SettlerUnitAction(world_board,p,currUnit);
     }
 
-    if(currUnit.getTypeString() == GameConstants.ARCHER)
+    if(currUnit.getTypeString().equals(GameConstants.ARCHER))
     {
       UnitMovement.ArcherUnitAction(currUnit);
     }
