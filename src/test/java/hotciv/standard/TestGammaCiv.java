@@ -56,5 +56,7 @@ public class TestGammaCiv {
         assertThat(game.getUnitAt(p),is(nullValue()));
         //make sure city population is 1
         assertThat(game.getCityAt(p).getPopulation(),is(1));
+        //make sure owner is still the same
+        assertThat(game.getCityAt(p).getOwner(),is(Player.RED));
     }
 }
