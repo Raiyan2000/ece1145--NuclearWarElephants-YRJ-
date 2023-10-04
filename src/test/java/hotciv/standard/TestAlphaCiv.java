@@ -42,7 +42,7 @@ public class TestAlphaCiv {
   /** Fixture for alphaciv testing. */
   @Before
   public void setUp() {
-    game = new GameImpl(new AlphaCivWorld(), new UnitActionAlpha());
+    game = new GameImpl(new AlphaCivWorld(), new UnitActionAlpha(), new CenturyRoundAges());
   }
 
   // FRS p. 455 states that 'Red is the first player to take a turn'.
@@ -172,9 +172,9 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void yearStarts4000()
+  public void yearStartsN4000()
   {
-    assertThat(game.getAge(), is(4000));
+    assertThat(game.getAge(), is(-4000));
   }
 
   @Test
@@ -184,7 +184,7 @@ public class TestAlphaCiv {
     game.setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
-    assertThat(game.getAge(), is(3900));
+    assertThat(game.getAge(), is(-3900));
   }
 
   @Test

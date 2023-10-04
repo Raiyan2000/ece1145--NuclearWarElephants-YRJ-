@@ -16,7 +16,7 @@ public class TestGammaCiv {
      */
     @Before
     public void setUp() {
-        game = new GameImpl(new AlphaCivWorld(), new UnitActionGamma());
+        game = new GameImpl(new AlphaCivWorld(), new UnitActionGamma(), new CenturyRoundAges());
     }
 
     //Test that the settler action fortifies the square

@@ -42,16 +42,20 @@ public class GameImpl implements Game {
   //current year variable
   private int age;
 
+  private WorldAgeStrategy ageStrategy;
+
   private String game_type;
   private UnitActionStrategy UnitMovement;
 
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(WorldLayout world_type, UnitActionStrategy UnitAction){
+  public GameImpl(WorldLayout world_type, UnitActionStrategy UnitAction, WorldAgeStrategy AgeStrategy){
 
     //game age starts at 4000
-    age = 4000;
+    age = -4000;
+
+    ageStrategy = AgeStrategy;
 
     // First turn: Player Red
     current_player_turn = Player.RED;
@@ -142,8 +146,16 @@ public class GameImpl implements Game {
       current_player_turn = Player.BLUE;
     } else if(current_player_turn == Player.BLUE) {
       //round is over at this point
+
+      //original implementation of the aging system
+
       //increment year by 100 after each round
-      age-=100;
+      age = ageStrategy.agePostRound(age);
+
+
+      //betaCiv version of the aging system
+      //agePostRound(age);
+
       //Round is over loop for cities
       for(int i = 0; i < GameConstants.WORLDSIZE; i++)
       {
@@ -200,3 +212,4 @@ public class GameImpl implements Game {
   }
 
 }
+
