@@ -141,58 +141,78 @@ public class GameImpl implements Game {
       return false; //move was unsuccessful
     }
   }
-  public void endOfTurn() {
-    if(current_player_turn == Player.RED) {
-      current_player_turn = Player.BLUE;
-    } else if(current_player_turn == Player.BLUE) {
-      //round is over at this point
 
-      //original implementation of the aging system
+  public void placeNewUnit(Unit new_unit, int row, int column)
+  {
+    if(world_board[row][column].getUnit() == null)
+    {
+      world_board[row][column].setUnitType(new_unit);
+    }
+    else {
+      world_board[row][column+1].setUnitType(new_unit);
+    }
+  }
+  public void endOfRound()
+  {
+    City current_city;
+    boolean sufficient_treasury;
+    boolean production_focused;
+
+    //Round is over loop for cities
+    for(int row = 0; row < GameConstants.WORLDSIZE; row++)
+    {
+      for(int column = 0; column < GameConstants.WORLDSIZE; column++)
+      {
+        if(world_board[row][column].getCity() != null)
+        {
+          //Get the current city
+          current_city = world_board[row][column].getCity();
+
+          //Check if there is sufficient treasury to produce the unit
+          sufficient_treasury = current_city.getTreasury() > current_city.getProductionCost();
+
+          //Check for production focus
+          production_focused = current_city.getWorkforceFocus() == GameConstants.productionFocus;
+
+          //Increment production of cities by 6
+          current_city.incrementProductionPerRound();
+
+          //Check if city has enough treasury to produce specified unit
+          if(sufficient_treasury && production_focused)
+          {
+            // Create new unit
+            Unit new_unit = new UnitImpl(current_city.getProduction(), current_city.getOwner());
+
+            //Placing new created unit at proper tile
+            placeNewUnit(new_unit, row, column);
+
+            //Remaining Treasury after unit cost
+            int remaining_treasury = current_city.getTreasury() - new_unit.getUnitCost();
+
+            //Deduct unit cost from Treasury of city
+            current_city.setTreasury(remaining_treasury);
+          }
+        }
+      }
+    }
+  }
+  public void endOfTurn() {
+    if (current_player_turn == Player.RED) {
+
+      current_player_turn = Player.BLUE;
+
+    } else if (current_player_turn == Player.BLUE) {
 
       //increment year by 100 after each round
       age = ageStrategy.agePostRound(age);
 
-
-      //betaCiv version of the aging system
-      //agePostRound(age);
-
-      //Round is over loop for cities
-      for(int i = 0; i < GameConstants.WORLDSIZE; i++)
-      {
-        for(int j = 0; j < GameConstants.WORLDSIZE; j++)
-        {
-          if(world_board[i][j].getCity() != null)
-          {
-            //Increment production of cities by 6
-            world_board[i][j].getCity().incrementProductionPerRound();
-
-            //Check if city has enough treasury to produce specified unit
-            if(world_board[i][j].getCity().getTreasury() > world_board[i][j].getCity().getProductionCost() && world_board[i][j].getCity().getWorkforceFocus() == GameConstants.productionFocus)
-            {
-              // Create new unit
-              Unit new_unit = new UnitImpl(world_board[i][j].getCity().getProduction(), world_board[i][j].getCity().getOwner());
-
-              //Place unit in proper tile depending on other units placement
-              if(world_board[i][j].getUnit() == null)
-              {
-                world_board[i][j].setUnitType(new_unit);
-              }
-              else {
-                world_board[i][j+1].setUnitType(new_unit);
-              }
-
-              //Deduct unit cost from Treasury of city
-              world_board[i][j].getCity().setTreasury(world_board[i][j].getCity().getTreasury() - new_unit.getUnitCost());
-            }
-          }
-
-        }
-      }
-
+      //end of round functionality
+      this.endOfRound();
 
       current_player_turn = Player.RED;
     }
   }
+
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p )
@@ -210,6 +230,7 @@ public class GameImpl implements Game {
       UnitMovement.ArcherUnitAction(currUnit);
     }
   }
+
 
 }
 
