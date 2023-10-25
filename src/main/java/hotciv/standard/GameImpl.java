@@ -106,40 +106,19 @@ public class GameImpl implements Game {
     //check to make sure unit exists at the starting position
     Unit initialUnit = world_board[from.getRow()][from.getColumn()].getUnit();
 
-    if(initialUnit != null)
+    //check terrain type of the location the unit wants to be moved to
+    String landTypeNewSpot = world_board[to.getRow()][to.getColumn()].getTypeString();
+
+    //check if unit exists and if terrain is traversable
+    if (initialUnit != (null) && !landTypeNewSpot.equals(GameConstants.MOUNTAINS) && !landTypeNewSpot.equals(GameConstants.OCEANS))
     {
-      //get terrain type of tile to be moved to
-      String landType = world_board[to.getRow()][to.getColumn()].getTypeString();
+      world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+      world_board[from.getRow()][from.getColumn()].setUnitType(null);
 
-      //check if there is a defending unit at the new position
-      if(world_board[to.getRow()][to.getColumn()].getUnit() != null) {
-        //there is a defending unit, but attacking wins, so replace defending unit w/ attacking unit
-        world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
-
-        //remove attacking unit from previous tile
-        world_board[from.getRow()][from.getColumn()].setUnitType(null);
-
-        return true;
-      }
-      else if(landType.equals(GameConstants.MOUNTAINS) || landType.equals(GameConstants.OCEANS))
-      {
-        return false; //cannot move to this type of terrain
-      }
-      else //case where terrain can be moved to and it is empty
-      {
-        //move unit to new location
-        world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
-
-        //remove unit from old location
-        world_board[from.getRow()][from.getColumn()].setUnitType(null);
-
-        return true;
-      }
+      return true;
     }
-    else
-    {
-      return false; //move was unsuccessful
-    }
+
+    return false; //exit function if any of the above conditions are met
   }
 
   public void placeNewUnit(Unit new_unit, int row, int column)
