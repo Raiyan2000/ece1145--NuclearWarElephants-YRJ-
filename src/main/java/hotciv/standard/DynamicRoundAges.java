@@ -2,49 +2,41 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 public class DynamicRoundAges implements WorldAgeStrategy {
-    public int agePostRound(int input) {
-        if (input >= -4000 && input < -100) {
-            input+=100;
-            return input;
+    public int agePostRound(int age) {
+        if (age >= -4000 && age < -100) {
+            age+=100;
         }
 
-        if (input == -100) {
-            input=-1;
-            return input;
+        else if (age == -100) {
+            age=-1;
         }
 
-        if (input == -1) {
-            input=1;
-            return input;
+        else if (age == -1) {
+            age=1;
         }
 
-        if (input == 1) {
-            input=50;
-            return input;
+        else if (age == 1) {
+            age=50;
         }
 
-        if (input >= 50 && input < 1750) {
-            input+=50;
-            return input;
+        else if (age >= 50 && age < 1750) {
+            age+=50;
         }
 
-        if (input >= 1750 && input < 1900) {
-            input+=25;
-            return input;
+        else if (age >= 1750 && age < 1900) {
+            age+=25;
         }
 
-        if (input >= 1900 && input < 1970) {
-            input+=5;
-            return input;
+        else if (age >= 1900 && age < 1970) {
+            age+=5;
         }
 
         //technically we could remove the 2000 limiter since that's the ending year of the game
-        if (input >= 1970 && input < 2000) {
-            input+=1;
-            return input;
+        else if (age >= 1970 && age < 2000) {
+            age+=1;
         }
 
-        return -99999;
+        return age;
     }
 
 }
