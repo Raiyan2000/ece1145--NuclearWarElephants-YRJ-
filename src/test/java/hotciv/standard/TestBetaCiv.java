@@ -54,13 +54,13 @@ public class TestBetaCiv {
 
     @Before
     public void setUp() {
-        game = new GameImpl(new DeltaCivWorld(), new UnitActionAlpha(), new DynamicRoundAges());
+        game = new GameImpl(new BetaCivFactory());
     }
 
     // FRS p. 455 states that 'Red is the first player to take a turn'.
     @Test
     public void CityConquerWinner() {
-        Position city_pos = new Position(8,12);
+        Position city_pos = new Position(1,1);
         assertThat(game.getCityAt(city_pos), is(notNullValue()));
         assertThat(game.getCityAt(city_pos).getOwner(), is(Player.RED));
     }

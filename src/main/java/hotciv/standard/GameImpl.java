@@ -37,6 +37,8 @@ public class GameImpl implements Game {
   private Player player_blue = Player.BLUE;
   private Player current_player_turn;
 
+  private HotCivFactory factory;
+
   private WorldLayout world_layout;
 
   //current year variable
@@ -50,21 +52,23 @@ public class GameImpl implements Game {
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
-  public GameImpl(WorldLayout world_type, UnitActionStrategy UnitAction, WorldAgeStrategy AgeStrategy){
+  public GameImpl(HotCivFactory myFactory){
 
     //game age starts at 4000
     age = -4000;
 
-    ageStrategy = AgeStrategy;
+    this.factory = myFactory;
+
+    ageStrategy = factory.createWorldAgeStrategy();
 
     // First turn: Player Red
     current_player_turn = Player.RED;
 
     // Set World Layout
-    world_layout = world_type;
+    world_layout = factory.createWorldLayout();
     world_layout.createWorld(world_board);
 
-    UnitMovement = UnitAction;
+    UnitMovement = factory.createUnitActionStrategy();
 
   }
 
