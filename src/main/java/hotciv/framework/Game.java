@@ -38,6 +38,8 @@ public interface Game {
 
   public String getGameType();
 
+  public void setNumAttackWins(Player name);
+
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.
    * @param p the position in the world that must be returned.
@@ -143,5 +145,6 @@ public interface Game {
    * @param p the position of a unit that must perform its action.
    * Nothing happens in case the unit has no associated action.
    */
-  public void performUnitActionAt( Position p );  
+  public void performUnitActionAt( Position p );
+
 }
