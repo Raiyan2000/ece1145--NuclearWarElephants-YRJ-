@@ -1,9 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.HotCivFactory;
-import hotciv.framework.UnitActionStrategy;
-import hotciv.framework.WorldAgeStrategy;
-import hotciv.framework.WorldLayout;
+import hotciv.framework.*;
 
 public class ZetaCivFactory implements HotCivFactory {
     public WorldLayout createWorldLayout()
@@ -19,5 +16,10 @@ public class ZetaCivFactory implements HotCivFactory {
     public WorldAgeStrategy createWorldAgeStrategy()
     {
         return new DynamicRoundAges();
+    }
+
+    //change this when it's time
+    public WinStrategy createWinStrategy() {
+        return new AttackAndConquerWinner();
     }
 }

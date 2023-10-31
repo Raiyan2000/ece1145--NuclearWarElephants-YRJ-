@@ -1,9 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.HotCivFactory;
-import hotciv.framework.UnitActionStrategy;
-import hotciv.framework.WorldAgeStrategy;
-import hotciv.framework.WorldLayout;
+import hotciv.framework.*;
 
 public class EpsilonCivFactory implements HotCivFactory {
 
@@ -20,5 +17,10 @@ public class EpsilonCivFactory implements HotCivFactory {
     public WorldAgeStrategy createWorldAgeStrategy()
     {
         return new CenturyRoundAges();
+    }
+
+    //change this when it's time
+    public WinStrategy createWinStrategy() {
+        return new ThreeAttackWinner();
     }
 }

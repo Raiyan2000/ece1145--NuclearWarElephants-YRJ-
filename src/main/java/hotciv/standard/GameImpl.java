@@ -49,6 +49,8 @@ public class GameImpl implements Game {
   private String game_type;
   private UnitActionStrategy UnitMovement;
 
+  private WinStrategy winStrategy;
+
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
@@ -60,6 +62,9 @@ public class GameImpl implements Game {
     this.factory = myFactory;
 
     ageStrategy = factory.createWorldAgeStrategy();
+
+    //setup the WinStrategy
+    winStrategy = factory.createWinStrategy();
 
     // First turn: Player Red
     current_player_turn = Player.RED;
@@ -100,7 +105,8 @@ public class GameImpl implements Game {
   public Player getPlayerInTurn() {
     return current_player_turn;
   }
-  public Player getWinner() { if (this.getAge() == 3000) {return Player.RED; } else { return null; } }
+
+  public Player getWinner() { return winStrategy.isWinner(age, world_board); }
   public int getAge() { return age; }
 
   public void setAge(int x) { age = x; }

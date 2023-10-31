@@ -7,4 +7,6 @@ public interface HotCivFactory {
     public UnitActionStrategy createUnitActionStrategy();
 
     public WorldAgeStrategy createWorldAgeStrategy();
+
+    public WinStrategy createWinStrategy();
 }

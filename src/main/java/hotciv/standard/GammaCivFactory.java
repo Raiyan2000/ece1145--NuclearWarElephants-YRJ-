@@ -1,9 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.HotCivFactory;
-import hotciv.framework.UnitActionStrategy;
-import hotciv.framework.WorldAgeStrategy;
-import hotciv.framework.WorldLayout;
+import hotciv.framework.*;
 
 public class GammaCivFactory implements HotCivFactory {
 
@@ -20,5 +17,9 @@ public class GammaCivFactory implements HotCivFactory {
     public WorldAgeStrategy createWorldAgeStrategy()
     {
         return new CenturyRoundAges();
+    }
+
+    public WinStrategy createWinStrategy() {
+        return new Age3000Winner();
     }
 }
