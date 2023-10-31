@@ -36,6 +36,10 @@ public class DynamicRoundAges implements WorldAgeStrategy {
             age+=1;
         }
 
+        //if something goes wrong, this should catch it and return that. Later will replace with a proper error code
+        else {
+            return -9999;
+        }
         return age;
     }
 
