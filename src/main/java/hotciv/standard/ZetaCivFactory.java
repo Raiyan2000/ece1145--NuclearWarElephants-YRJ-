@@ -18,6 +18,6 @@ public class ZetaCivFactory implements HotCivFactory {
 
     public WorldAgeStrategy createWorldAgeStrategy()
     {
-        return new CenturyRoundAges();
+        return new DynamicRoundAges();
     }
 }
