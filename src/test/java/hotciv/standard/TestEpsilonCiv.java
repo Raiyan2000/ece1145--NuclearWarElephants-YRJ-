@@ -57,11 +57,11 @@ public class TestEpsilonCiv {
         game1.test_setUnitPosition(p1,Archer2);
         game1.test_setUnitPosition(p1,Archer2);
 
-//        assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
-//        assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));
-//
-//        assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
-//        assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
+        //assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
+        //assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));
+
+       //assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
+       //assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
     }
 
 

@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import java.util.Random;
+import java.util.Iterator;
 
 public class EpsilonAttack implements AttackStrategy
 {
@@ -48,7 +49,19 @@ public class EpsilonAttack implements AttackStrategy
 
     public int getFriendlyUnitsFactor(Game game_board, Position position)
     {
-        return 0;
+        Iterator<Position> neighborhood = Utility.get8neighborhoodIterator(position);
+        Position p;
+        //get owner of attacking unit
+        Player player = game_board.getUnitAt(position).getOwner();
+        int support = 0;
+        while (neighborhood.hasNext()) {
+            p = neighborhood.next();
+            if (game_board.getUnitAt(p) != null &&
+                    game_board.getUnitAt(p).getOwner() == player) {
+                support++;
+            }
+        }
+        return support;
     }
 }
 
