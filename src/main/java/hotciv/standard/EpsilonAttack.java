@@ -27,6 +27,11 @@ public class EpsilonAttack implements AttackStrategy
         }
         return 1;
     }
+
+    public int getFriendlyUnitsFactor(Game game_board, Position position)
+    {
+        return 0;
+    }
 }
 
 

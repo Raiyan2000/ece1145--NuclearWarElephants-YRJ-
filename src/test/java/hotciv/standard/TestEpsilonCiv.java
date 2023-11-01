@@ -9,13 +9,13 @@ import java.util.Iterator;
 
 public class TestEpsilonCiv {
 
-    private Game game;
+    private Game game1;
     private ThreeAttackWinner testWin;
     private EpsilonAttack attackObject;
     private TileImpl[][] world_layout;
     @Before
     public void setUp() {
-        game = new GameImpl(new EpsilonCivFactory());
+        game1 = new GameImpl(new EpsilonCivFactory());
         world_layout = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
         testWin = new ThreeAttackWinner();
     }
@@ -40,20 +40,28 @@ public class TestEpsilonCiv {
     @Test
     public void TestEpsilonAttack1()
     {
-        Position p1 = new Position(3,5);
-        Unit Archer = new UnitImpl(GameConstants.ARCHER,Player.RED);
-        Unit Settler = new UnitImpl(GameConstants.SETTLER,Player.RED);
-        game.test_setUnitPosition(p1,Archer);
-    }
+        //attacking terrain and units
+        Position p1 = new Position(3,6);
+        Position p2 = new Position(3,7);
 
-    @Test
-    public void TestEpsilonAttack2()
-    {
-        Position p1 = new Position(3,5);
-        Unit Archer = new UnitImpl(GameConstants.ARCHER,Player.RED);
-        Unit Settler = new UnitImpl(GameConstants.SETTLER,Player.RED);
-        game.test_setUnitPosition(p1,Archer);
+        //defending terrain and units
+        Position p3 = new Position(4,6);
+        Position p4 = new Position(4,7);
 
+        //place units on the board
+        Unit Archer = new UnitImpl(GameConstants.ARCHER,Player.RED);
+        Unit Archer2 = new UnitImpl(GameConstants.ARCHER,Player.BLUE);
+        Unit Settler = new UnitImpl(GameConstants.SETTLER,Player.RED);
+        game1.test_setUnitPosition(p1,Archer);
+        game1.test_setUnitPosition(p2,Settler);
+        game1.test_setUnitPosition(p1,Archer2);
+        game1.test_setUnitPosition(p1,Archer2);
+
+        assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
+        assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));
+
+        assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
+        assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
     }
 
 

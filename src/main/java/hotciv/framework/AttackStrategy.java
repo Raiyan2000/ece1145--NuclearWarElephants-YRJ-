@@ -6,4 +6,6 @@ public interface AttackStrategy
 
     public int getTerrainFactor(Game game_board, Position position);
 
+    public int getFriendlyUnitsFactor(Game game_board, Position position);
+
 }
