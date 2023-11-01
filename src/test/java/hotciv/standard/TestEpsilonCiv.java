@@ -18,6 +18,7 @@ public class TestEpsilonCiv {
         game1 = new GameImpl(new EpsilonCivFactory());
         world_layout = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
         testWin = new ThreeAttackWinner();
+        attackObject = new EpsilonAttack();
     }
     @Test
     public void TestEpsilonWin()
@@ -54,14 +55,14 @@ public class TestEpsilonCiv {
         Unit Settler = new UnitImpl(GameConstants.SETTLER,Player.RED);
         game1.test_setUnitPosition(p1,Archer);
         game1.test_setUnitPosition(p2,Settler);
-        game1.test_setUnitPosition(p1,Archer2);
-        game1.test_setUnitPosition(p1,Archer2);
+        game1.test_setUnitPosition(p3,Archer2);
+        game1.test_setUnitPosition(p4,Archer2);
 
-        //assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
-        //assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));
+        assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
+        assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));
 
-       //assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
-       //assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
+       assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
+       assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
     }
 
 
