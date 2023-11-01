@@ -16,4 +16,9 @@ public class AttackAndConquerWinner implements WinStrategy {
         return null;
     }
 
+    public void setAttackWinCount(Player p)
+    {
+        return;
+    }
+
 }

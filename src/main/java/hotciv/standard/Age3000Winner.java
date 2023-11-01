@@ -7,4 +7,9 @@ public class Age3000Winner implements WinStrategy {
         if (age == 3000) {return Player.RED; } else { return null; }
     }
 
+    public void setAttackWinCount(Player p)
+    {
+        return;
+    }
+
 }

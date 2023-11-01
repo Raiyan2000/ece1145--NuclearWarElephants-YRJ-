@@ -6,7 +6,7 @@ public class EpsilonCivFactory implements HotCivFactory {
 
     public WorldLayout createWorldLayout()
     {
-        return new AlphaCivWorld();
+        return new DeltaCivWorld();
     }
 
     public UnitActionStrategy createUnitActionStrategy()

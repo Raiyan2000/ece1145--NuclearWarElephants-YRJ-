@@ -46,10 +46,18 @@ public class GameImpl implements Game {
 
   private WorldAgeStrategy ageStrategy;
 
+  private Game game_board;
+
   private String game_type;
   private UnitActionStrategy UnitMovement;
 
   private WinStrategy winStrategy;
+
+  private AttackStrategy attackStrategyObject;
+
+  private int RedAttackWins;
+
+  private int BlueAttackWins;
 
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
@@ -122,13 +130,48 @@ public class GameImpl implements Game {
     //check if unit exists and if terrain is traversable
     if (initialUnit != (null) && !landTypeNewSpot.equals(GameConstants.MOUNTAINS) && !landTypeNewSpot.equals(GameConstants.OCEANS))
     {
-      world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
-      world_board[from.getRow()][from.getColumn()].setUnitType(null);
+      //check to see if there is a defending unit and a need to attack
+      Unit defendingUnit = world_board[to.getRow()][to.getColumn()].getUnit();
 
-      return true;
+      if(defendingUnit != null)
+      {
+        boolean successfulAttack = attackStrategyObject.Attack(from,to,game_board);
+
+        if(successfulAttack)
+        {
+          Player attackUnitOwner = initialUnit.getOwner();
+          winStrategy.setAttackWinCount(attackUnitOwner);
+          return true;
+        }
+        else
+        {
+          //attack failed, so remove initial attacking unit from board
+          world_board[from.getRow()][from.getColumn()].setUnitType(null);
+          return false;
+        }
+      }
+      else
+      {
+        //no defending unit, so just place new unit on new tile and remove old unit
+        world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+        world_board[from.getRow()][from.getColumn()].setUnitType(null);
+        return true;
+      }
     }
 
     return false; //exit function if any of the above conditions are met
+  }
+
+  public int GetNumAttackWins(Player p)
+  {
+    if(p == Player.BLUE)
+    {
+      return BlueAttackWins;
+    }
+    else
+    {
+      return RedAttackWins;
+    }
   }
 
   public void placeNewUnit(Unit new_unit, int row, int column)

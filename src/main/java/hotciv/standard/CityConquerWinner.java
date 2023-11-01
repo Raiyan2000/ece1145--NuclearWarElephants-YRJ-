@@ -43,4 +43,9 @@ public class CityConquerWinner implements WinStrategy {
 
     }
 
+    public void setAttackWinCount(Player p)
+    {
+        return;
+    }
+
 }

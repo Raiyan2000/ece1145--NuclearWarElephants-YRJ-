@@ -2,8 +2,8 @@ package hotciv.framework;
 
 public interface AttackStrategy
 {
-    public void Attack();
+    public boolean Attack(Position from, Position to,Game game_board);
 
-    public int GetNumAttackWins(Player player);
+    public int getTerrainFactor(Game game_board, Position position);
 
 }
