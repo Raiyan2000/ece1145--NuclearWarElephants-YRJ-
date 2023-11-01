@@ -23,4 +23,6 @@ public class DeltaCivFactory implements HotCivFactory {
     public WinStrategy createWinStrategy() {
         return new Age3000Winner();
     }
+
+    public AttackStrategy createAttackStrategy(){return null;}
 }

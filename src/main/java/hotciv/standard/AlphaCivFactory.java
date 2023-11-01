@@ -1,10 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.HotCivFactory;
-import hotciv.framework.UnitActionStrategy;
-import hotciv.framework.WorldAgeStrategy;
-import hotciv.framework.WorldLayout;
-import hotciv.framework.WinStrategy;
+import hotciv.framework.*;
 
 public class AlphaCivFactory implements HotCivFactory {
     public WorldLayout createWorldLayout()
@@ -25,4 +21,6 @@ public class AlphaCivFactory implements HotCivFactory {
     public WinStrategy createWinStrategy() {
         return new Age3000Winner();
     }
+
+    public AttackStrategy createAttackStrategy(){return null;}
 }

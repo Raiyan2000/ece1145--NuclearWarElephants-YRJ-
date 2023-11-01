@@ -23,4 +23,6 @@ public class EpsilonCivFactory implements HotCivFactory {
     public WinStrategy createWinStrategy() {
         return new ThreeAttackWinner();
     }
+
+    public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
 }

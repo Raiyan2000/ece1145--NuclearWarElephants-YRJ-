@@ -9,4 +9,6 @@ public interface HotCivFactory {
     public WorldAgeStrategy createWorldAgeStrategy();
 
     public WinStrategy createWinStrategy();
+
+    public AttackStrategy createAttackStrategy();
 }

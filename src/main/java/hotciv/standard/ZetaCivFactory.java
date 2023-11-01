@@ -22,4 +22,6 @@ public class ZetaCivFactory implements HotCivFactory {
     public WinStrategy createWinStrategy() {
         return new AttackAndConquerWinner();
     }
+
+    public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
 }

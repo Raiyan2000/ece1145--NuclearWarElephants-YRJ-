@@ -83,6 +83,9 @@ public class GameImpl implements Game {
 
     UnitMovement = factory.createUnitActionStrategy();
 
+    winStrategy = factory.createWinStrategy();
+
+    attackStrategyObject = factory.createAttackStrategy();
   }
 
   public String getGameType() {
