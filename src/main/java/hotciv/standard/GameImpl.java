@@ -142,6 +142,10 @@ public class GameImpl implements Game {
 
         if(successfulAttack)
         {
+          //update the board
+          world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+          world_board[from.getRow()][from.getColumn()].setUnitType(null);
+
           Player attackUnitOwner = initialUnit.getOwner();
           winStrategy.setAttackWinCount(attackUnitOwner);
           return true;
