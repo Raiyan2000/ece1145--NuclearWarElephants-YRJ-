@@ -18,8 +18,7 @@ public class ThetaCivFactory implements HotCivFactory {
     {
         return new CenturyRoundAges();
     }
-
-    //change this when it's time
+    
     public WinStrategy createWinStrategy() {
         return new Age3000Winner();
     }
