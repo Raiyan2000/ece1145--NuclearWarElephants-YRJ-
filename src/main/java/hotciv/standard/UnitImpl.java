@@ -20,11 +20,30 @@ public class UnitImpl implements Unit {
         if(troop_type == GameConstants.ARCHER)
         {
             unit_cost = 10;
-            defensive_stats = 4;
+            defensive_stats = 3;
+            attack_stats = 2;
+            moveCount = 1;
         }
         else if(troop_type == GameConstants.LEGION)
         {
             unit_cost = 15;
+            attack_stats = 4;
+            defensive_stats = 2;
+            moveCount = 1;
+        }
+        else if(troop_type == GameConstants.UFO)
+        {
+            unit_cost = 60;
+            defensive_stats = 8;
+            attack_stats = 1;
+            moveCount = 2;
+        }
+        else if(troop_type.equals(GameConstants.SETTLER))
+        {
+            unit_cost = 30;
+            defensive_stats = 3;
+            attack_stats = 0;
+            moveCount = 1;
         }
         else
         {

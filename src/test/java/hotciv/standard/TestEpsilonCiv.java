@@ -64,6 +64,4 @@ public class TestEpsilonCiv {
        assertThat(attackObject.getTerrainFactor(game1,p3),is(1));
        assertThat(attackObject.getFriendlyUnitsFactor(game1,p3),is(1));
     }
-
-
 }
