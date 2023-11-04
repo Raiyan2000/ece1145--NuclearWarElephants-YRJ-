@@ -24,5 +24,5 @@ public class BetaCivFactory implements HotCivFactory {
         return new CityConquerWinner();
     }
 
-    public AttackStrategy createAttackStrategy(){return null;}
+    public AttackStrategy createAttackStrategy(){return new AttackerWinsAttack();}
 }

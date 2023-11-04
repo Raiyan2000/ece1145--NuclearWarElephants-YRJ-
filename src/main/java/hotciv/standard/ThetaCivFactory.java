@@ -6,23 +6,22 @@ public class ThetaCivFactory implements HotCivFactory {
 
     public WorldLayout createWorldLayout()
     {
-        return new DeltaCivWorld();
+        return new AlphaCivWorld();
     }
 
     public UnitActionStrategy createUnitActionStrategy()
     {
-        return new UnitActionAlpha();
+        return new UnitActionGamma();
     }
 
     public WorldAgeStrategy createWorldAgeStrategy()
     {
-        return new DynamicRoundAges();
+        return new CenturyRoundAges();
     }
 
     //change this when it's time
     public WinStrategy createWinStrategy() {
-        return new ThreeAttackWinner();
+        return new Age3000Winner();
     }
-
-    public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
+    public AttackStrategy createAttackStrategy(){return new AttackerWinsAttack();}
 }

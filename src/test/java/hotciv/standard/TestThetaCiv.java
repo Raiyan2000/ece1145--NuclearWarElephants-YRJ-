@@ -14,7 +14,6 @@ public class TestThetaCiv {
 
     private Game game;
 
-
     /** Fixture for Thetaciv testing. */
     @Before
     public void setUp() {
