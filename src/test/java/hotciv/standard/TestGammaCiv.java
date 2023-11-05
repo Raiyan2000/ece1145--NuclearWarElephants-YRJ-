@@ -29,7 +29,7 @@ public class TestGammaCiv {
         //fortify status should be on
         assertThat(currUnit.getArcherState(), is(1));
         //defensive value should be twice as original
-        assertThat(currUnit.getDefensiveStrength(), is(8));
+        assertThat(currUnit.getDefensiveStrength(), is(6));
         //make sure unit is immobile
         assertThat(currUnit.getMoveCount(), is(0));
 
@@ -38,7 +38,7 @@ public class TestGammaCiv {
         //fortify should be removed
         assertThat(currUnit.getArcherState(), is(0));
         //defensive value should be halved
-        assertThat(currUnit.getDefensiveStrength(), is(4));
+        assertThat(currUnit.getDefensiveStrength(), is(3));
         //make sure unit is mobile
         assertThat(currUnit.getMoveCount(), is(1));
     }

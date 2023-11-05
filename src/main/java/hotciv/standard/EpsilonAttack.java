@@ -11,16 +11,20 @@ public class EpsilonAttack implements AttackStrategy
         //get combined defensive strength
         int defenseTerrainPoints = getTerrainFactor(game_board,to);
         int defenseFriendlyUnits = getFriendlyUnitsFactor(game_board,to);
+        Unit defendingUnit = game_board.getUnitAt(to);
+        int defenseStat = defendingUnit.getDefensiveStrength();
 
         //obtains total defensive points
-        int totalDefensiveStrength = defenseFriendlyUnits * defenseTerrainPoints;
+        int totalDefensiveStrength = (defenseStat + defenseFriendlyUnits) * defenseTerrainPoints;
 
         //get combined offensive strength
         int offensiveTerrainPoints = getTerrainFactor(game_board,from);
         int offenseFriendlyUnits = getFriendlyUnitsFactor(game_board,from);
+        Unit attackingUnit = game_board.getUnitAt(from);
+        int attackStat = defendingUnit.getAttackingStrength();
 
         //obtains total offensive points
-        int totalOffenseStrength = offenseFriendlyUnits * offensiveTerrainPoints;
+        int totalOffenseStrength = (attackStat + offenseFriendlyUnits) * offensiveTerrainPoints;
 
         //random number values calculated into attack results
         Random rand = new Random();
