@@ -78,4 +78,8 @@ public interface Unit {
 
   public void setArcherState(int fortify_status);
 
+  public void setUnitMovementType(String movement);
+
+  public String getUnitMovementType();
+
 }

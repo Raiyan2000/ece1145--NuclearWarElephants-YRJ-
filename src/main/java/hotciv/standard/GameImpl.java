@@ -133,6 +133,9 @@ public class GameImpl implements Game {
     //check if unit exists and if terrain is traversable
     if (initialUnit != (null) && !landTypeNewSpot.equals(GameConstants.MOUNTAINS) && !landTypeNewSpot.equals(GameConstants.OCEANS))
     {
+      //check initial unit movement type
+      String movementType = initialUnit.getUnitMovementType();
+
       //check to see if there is a defending unit and a need to attack
       Unit defendingUnit = world_board[to.getRow()][to.getColumn()].getUnit();
 
@@ -147,6 +150,13 @@ public class GameImpl implements Game {
           world_board[from.getRow()][from.getColumn()].setUnitType(null);
 
           Player attackUnitOwner = initialUnit.getOwner();
+
+          //change owner of city in event of successful conquest
+          if(world_board[to.getRow()][to.getColumn()].getCity() != null)
+          {
+            world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(attackUnitOwner);
+          }
+
           winStrategy.setAttackWinCount(attackUnitOwner);
           return true;
         }
@@ -162,6 +172,15 @@ public class GameImpl implements Game {
         //no defending unit, so just place new unit on new tile and remove old unit
         world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
         world_board[from.getRow()][from.getColumn()].setUnitType(null);
+
+        if(movementType.equals(GameConstants.GROUND))
+        {
+          //change city owner if successful conquest
+          if (world_board[to.getRow()][to.getColumn()].getCity() != null) {
+            world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(initialUnit.getOwner());
+          }
+        }
+
         return true;
       }
     }
@@ -267,6 +286,11 @@ public class GameImpl implements Game {
     if(currUnit.getTypeString().equals(GameConstants.ARCHER))
     {
       UnitMovement.ArcherUnitAction(currUnit);
+    }
+
+    if(currUnit.getTypeString().equals(GameConstants.UFO))
+    {
+      UnitMovement.ufoUnitAction(world_board,p,currUnit);
     }
   }
 

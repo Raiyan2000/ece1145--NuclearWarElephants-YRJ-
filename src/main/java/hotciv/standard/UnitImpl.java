@@ -13,30 +13,35 @@ public class UnitImpl implements Unit {
     private int attack_stats;
     private int moveCount;
 
+    private String unitMovementType;
+
     public UnitImpl(String troop_type, Player name) {
         unit_type = troop_type;
         owner = name;
 
-        if(troop_type == GameConstants.ARCHER)
+        if(troop_type.equals(GameConstants.ARCHER))
         {
             unit_cost = 10;
             defensive_stats = 3;
             attack_stats = 2;
             moveCount = 1;
+            unitMovementType = GameConstants.GROUND;
         }
-        else if(troop_type == GameConstants.LEGION)
+        else if(troop_type.equals(GameConstants.LEGION))
         {
             unit_cost = 15;
             attack_stats = 4;
             defensive_stats = 2;
             moveCount = 1;
+            unitMovementType = GameConstants.GROUND;
         }
-        else if(troop_type == GameConstants.UFO)
+        else if(troop_type.equals(GameConstants.UFO))
         {
             unit_cost = 60;
             defensive_stats = 8;
             attack_stats = 1;
             moveCount = 2;
+            unitMovementType = GameConstants.FLYING;
         }
         else if(troop_type.equals(GameConstants.SETTLER))
         {
@@ -44,6 +49,7 @@ public class UnitImpl implements Unit {
             defensive_stats = 3;
             attack_stats = 0;
             moveCount = 1;
+            unitMovementType = GameConstants.GROUND;
         }
         else
         {
@@ -109,5 +115,15 @@ public class UnitImpl implements Unit {
     public void setMoveCount(int moves)
     {
         moveCount = moves;
+    }
+
+    public void setUnitMovementType(String movement)
+    {
+        unitMovementType = movement;
+    }
+
+    public String getUnitMovementType()
+    {
+        return unitMovementType;
     }
 }

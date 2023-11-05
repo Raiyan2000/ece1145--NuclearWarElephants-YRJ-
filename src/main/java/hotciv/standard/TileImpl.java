@@ -33,6 +33,11 @@ public class TileImpl implements Tile{
         city = temp_city;
     }
 
+    public void removeCity()
+    {
+        city = null;
+    }
+
     public Unit getUnit(){
         return unit;
     }

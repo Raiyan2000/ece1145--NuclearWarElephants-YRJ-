@@ -2,7 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class UnitActionGamma implements UnitActionStrategy
+public class ThetaCivUnitAction implements UnitActionStrategy
 {
     public void ArcherUnitAction(Unit archer_unit)
     {
@@ -36,7 +36,35 @@ public class UnitActionGamma implements UnitActionStrategy
         board[p.getRow()][p.getColumn()].getCity().setPopulation(1);
     }
 
-    public void ufoUnitAction(TileImpl[][] board, Position p, Unit ufo) {
-        return;
+    public void ufoUnitAction(TileImpl[][] board, Position p, Unit ufo)
+    {
+        //check if city exists
+        if(board[p.getRow()][p.getColumn()].getCity() != null)
+        {
+            //obtain current city population
+            int cityPopulation = board[p.getRow()][p.getColumn()].getCity().getPopulation();
+
+            if(cityPopulation != 0)
+            {
+                //subtract one from city population
+                board[p.getRow()][p.getColumn()].getCity().setPopulation(cityPopulation - 1);
+            }
+            else
+            {
+                //erases city from map if population reaches zero
+                board[p.getRow()][p.getColumn()].removeCity();
+            }
+        }
+        else
+        {
+            //check terrain type
+            String terrainType = board[p.getRow()][p.getColumn()].getTypeString();
+
+            if(terrainType.equals(GameConstants.FOREST))
+            {
+                //set terrain type to plains
+                board[p.getRow()][p.getColumn()].setTypeString(GameConstants.PLAINS);
+            }
+        }
     }
 }

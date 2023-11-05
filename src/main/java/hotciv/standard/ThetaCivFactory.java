@@ -11,7 +11,7 @@ public class ThetaCivFactory implements HotCivFactory {
 
     public UnitActionStrategy createUnitActionStrategy()
     {
-        return new UnitActionGamma();
+        return new ThetaCivUnitAction();
     }
 
     public WorldAgeStrategy createWorldAgeStrategy()

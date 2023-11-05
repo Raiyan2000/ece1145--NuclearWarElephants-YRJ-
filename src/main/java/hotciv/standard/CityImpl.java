@@ -39,6 +39,7 @@ public class CityImpl implements City{
         owner_city = name;
     }
 
+    //sets unit to be produced in city
     public void setProductionType(String unit){
         unit_production = unit;
     }

@@ -7,4 +7,6 @@ public interface UnitActionStrategy
     void ArcherUnitAction(Unit u);
 
     void SettlerUnitAction(TileImpl[][] board,Position p, Unit u);
+
+    void ufoUnitAction(TileImpl[][] board, Position p, Unit ufo);
 }
