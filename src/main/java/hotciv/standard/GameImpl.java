@@ -272,7 +272,10 @@ public class GameImpl implements Game {
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
-  public void changeProductionInCityAt( Position p, String unitType ) {}
+  public void changeProductionInCityAt( Position p, String unitType )
+  {
+    world_board[p.getRow()][p.getColumn()].getCity().setProduction(unitType);
+  }
   public void performUnitActionAt( Position p )
   {
     //obtains unit present at the current tile

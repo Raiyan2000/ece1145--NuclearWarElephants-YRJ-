@@ -78,4 +78,6 @@ public interface City {
 
   public int getPopulation();
 
+  public void setProduction(String unit);
+
 }

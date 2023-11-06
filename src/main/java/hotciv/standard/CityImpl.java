@@ -85,6 +85,10 @@ public class CityImpl implements City{
         return treasury_of_city;
     }
 
+    public void setProduction(String unit)
+    {
+        unit_production = unit;
+    }
 
     public String getProduction() {
         return unit_production;
