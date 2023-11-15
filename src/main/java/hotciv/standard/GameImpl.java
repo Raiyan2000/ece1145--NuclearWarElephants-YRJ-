@@ -87,6 +87,7 @@ public class GameImpl implements Game {
     winStrategy = factory.createWinStrategy();
 
     attackStrategyObject = factory.createAttackStrategy();
+
   }
 
   public String getGameType() {
