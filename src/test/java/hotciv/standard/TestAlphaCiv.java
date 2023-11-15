@@ -260,5 +260,74 @@ public class TestAlphaCiv {
     assertThat(game.getCityAt(city_of_red).getTreasury(), is(96));
   }
 
+  @Test
+  public void TestStackingConditionMoveUnit()
+  {
+    //test condition where a unit is already at To tile
+    Position p0 = new Position(2,0);
+    Position p1 = new Position(3,0);
+    Unit RedLegion = new UnitImpl(GameConstants.LEGION,Player.RED);
+    game.test_setUnitPosition(p1,RedLegion);
+
+    assertThat(game.moveUnit(p0,p1),is(false));
+
+    //test condition where tile is empty and has no units
+    Position p2 = new Position(2,1);
+    assertThat(game.moveUnit(p0,p2),is(true));
+  }
+
+  @Test
+  public void TestTerrainMoveUnit()
+  {
+    //cannot move to mountain terrain
+    Position p0 = new Position(2,3);
+    Position p1 = new Position(2,2);
+    Unit BlueLegion = new UnitImpl(GameConstants.LEGION,Player.BLUE);
+    game.test_setUnitPosition(p0,BlueLegion);
+    assertThat(game.moveUnit(p0,p1),is(false));
+
+    //cannot move to ocean
+    Position p2 = new Position(1,0);
+    Position p3 = new Position(2,0);
+    assertThat(game.moveUnit(p3,p2),is(false));
+
+    //can move to plains and hills
+    Position p4 = new Position(2,4);
+    assertThat(game.moveUnit(p0,p4),is(true));
+
+  }
+
+  @Test
+  public void TestDistanceMoveUnit()
+  {
+    Position p0 = new Position(2,0);
+    Position p1 = new Position(4,0);
+    Position p2 = new Position(3,0);
+    Position p3 = new Position(2,8);
+    Position p4 = new Position(2,1);
+    Position p5 = new Position(3,1);
+    assertThat(game.moveUnit(p0,p1),is(false));
+
+    assertThat(game.moveUnit(p0,p2),is(true));
+
+    Unit RedArcher = new UnitImpl(GameConstants.ARCHER,Player.RED);
+    game.test_setUnitPosition(p0,RedArcher);
+
+    assertThat(game.moveUnit(p0,p3),is(false));
+
+    assertThat(game.moveUnit(p0,p4),is(true));
+
+    Unit RedArcher1 = new UnitImpl(GameConstants.ARCHER,Player.RED);
+    game.test_setUnitPosition(p0,RedArcher1);
+
+    assertThat(game.moveUnit(p0,p5),is(true));
+
+    Unit RedArcher2 = new UnitImpl(GameConstants.ARCHER,Player.RED);
+    game.test_setUnitPosition(p0,RedArcher2);
+
+    assertThat(game.moveUnit(p0,p0),is(false));
+  }
+
+
 }
 

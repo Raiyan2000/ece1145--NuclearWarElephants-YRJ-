@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import java.lang.Math;
 
 /** Skeleton implementation of HotCiv.
  
@@ -130,42 +131,56 @@ public class GameImpl implements Game {
     //check terrain type of the location the unit wants to be moved to
     String landTypeNewSpot = world_board[to.getRow()][to.getColumn()].getTypeString();
 
+    //check to see if there is a defending unit and a need to attack
+    Unit defendingUnit = world_board[to.getRow()][to.getColumn()].getUnit();
+
+    //check distance moved
+    int rowDistance = Math.abs(to.getRow()- from.getRow());
+    int colDistance = Math.abs(to.getColumn() - from.getColumn());
+    double totalDistance = Math.sqrt(colDistance*colDistance + rowDistance*rowDistance);
+
     //check if unit exists and if terrain is traversable
-    if (initialUnit != (null) && !landTypeNewSpot.equals(GameConstants.MOUNTAINS) && !landTypeNewSpot.equals(GameConstants.OCEANS))
+    if (initialUnit != (null) && !landTypeNewSpot.equals(GameConstants.MOUNTAINS) && !landTypeNewSpot.equals(GameConstants.OCEANS) && totalDistance>0 && totalDistance<=Math.sqrt(2) && to.getColumn()>=0 && to.getRow()<=15 && from.getColumn()>=0 && from.getRow()<=15)
     {
+      //check owner of attacking unit
+      Player attackUnitOwner = initialUnit.getOwner();
+
+
       //check initial unit movement type
       String movementType = initialUnit.getUnitMovementType();
 
-      //check to see if there is a defending unit and a need to attack
-      Unit defendingUnit = world_board[to.getRow()][to.getColumn()].getUnit();
+      if(defendingUnit != null) {
+        Player defendingUnitOwner = defendingUnit.getOwner();
 
-      if(defendingUnit != null)
-      {
-        boolean successfulAttack = attackStrategyObject.Attack(from,to,game_board);
-
-        if(successfulAttack)
+        if(!defendingUnitOwner.equals(attackUnitOwner))
         {
-          //update the board
-          world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
-          world_board[from.getRow()][from.getColumn()].setUnitType(null);
+          boolean successfulAttack = attackStrategyObject.Attack(from, to, game_board);
 
-          Player attackUnitOwner = initialUnit.getOwner();
+          if (successfulAttack) {
+            //update the board
+            world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
+            world_board[from.getRow()][from.getColumn()].setUnitType(null);
 
-          //change owner of city in event of successful conquest
-          if(world_board[to.getRow()][to.getColumn()].getCity() != null)
-          {
-            world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(attackUnitOwner);
+            //change owner of city in event of successful conquest
+            if (world_board[to.getRow()][to.getColumn()].getCity() != null) {
+              world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(attackUnitOwner);
+            }
+
+            winStrategy.setAttackWinCount(attackUnitOwner);
+            return true;
           }
-
-          winStrategy.setAttackWinCount(attackUnitOwner);
-          return true;
+          else
+          {
+            //attack failed, so remove initial attacking unit from board
+            world_board[from.getRow()][from.getColumn()].setUnitType(null);
+            return false;
+          }
         }
         else
         {
-          //attack failed, so remove initial attacking unit from board
-          world_board[from.getRow()][from.getColumn()].setUnitType(null);
           return false;
         }
+
       }
       else
       {
