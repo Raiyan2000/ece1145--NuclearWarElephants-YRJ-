@@ -33,9 +33,8 @@ Responsibilities:
 */
 public interface Unit {
 
-  public void setUnitCost(int cost);
-
-  public int getUnitCost();
+  //public void setUnitCost(int cost);
+  //public int getUnitCost();
 
   /** return the type of the unit
    * @return unit type as a string, valid values are at

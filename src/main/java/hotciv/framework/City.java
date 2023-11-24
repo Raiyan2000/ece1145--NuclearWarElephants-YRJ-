@@ -32,16 +32,13 @@ Responsibilities:
 */
 public interface City {
 
-  public void setWorkFocus(String type);
-  public void incrementProductionPerRound();
-  public void setOwnerCity(Player name);
-  public void setProductionType(String unit);
-
-  public void calculateProductionCost();
-
-  public int getProductionCost();
-
-  public void setTreasury(int amount);
+  //public void setWorkFocus(String type);
+  //public void incrementProductionPerRound();
+  //public void setOwnerCity(Player name);
+  //public void setProductionType(String unit);
+  //public void calculateProductionCost();
+  //public int getProductionCost();
+  //public void setTreasury(int amount);
 
   /** return the owner of this city.
    * @return the player that controls this city.

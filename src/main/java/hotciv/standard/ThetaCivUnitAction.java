@@ -63,7 +63,7 @@ public class ThetaCivUnitAction implements UnitActionStrategy
             if(terrainType.equals(GameConstants.FOREST))
             {
                 //set terrain type to plains
-                board[p.getRow()][p.getColumn()].setTypeString(GameConstants.PLAINS);
+                ((TileImpl)(board[p.getRow()][p.getColumn()])).setTypeString(GameConstants.PLAINS);
             }
         }
     }

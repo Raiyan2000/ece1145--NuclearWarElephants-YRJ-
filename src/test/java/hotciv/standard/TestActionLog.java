@@ -57,11 +57,11 @@ public class TestActionLog {
         Position city_of_red = new Position(1,1);
         Position pos_of_newUnit = new Position(1, 2);
 
-        game.getCityAt(city_of_red).setTreasury(100);
+        ((CityImpl)(game.getCityAt(city_of_red))).setTreasury(100);
 
-        game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
-        game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
-        game.getCityAt(city_of_red).calculateProductionCost();
+        ((CityImpl)(game.getCityAt(city_of_red))).setWorkFocus(GameConstants.productionFocus);
+        ((CityImpl)(game.getCityAt(city_of_red))).setProductionType(GameConstants.ARCHER);
+        ((CityImpl)(game.getCityAt(city_of_red))).calculateProductionCost();
 
 
         Unit temp = new UnitImpl(GameConstants.LEGION, Player.RED);
