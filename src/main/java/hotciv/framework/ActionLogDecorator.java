@@ -63,7 +63,7 @@ public class ActionLogDecorator implements Game {
 
     //untouched
     public void setAge(int x) {
-        game.setAge(x);
+        ((GameImpl)(game)).setAge(x);
     }
 
     //test

@@ -191,7 +191,7 @@ public class TestAlphaCiv {
   public void redWinsAge3000()
   {
     //set game to year 3000BC
-    game.setAge(3000);
+    ((GameImpl)(game)).setAge(3000);
 
     assertThat(game.getAge(), is(3000));
 
