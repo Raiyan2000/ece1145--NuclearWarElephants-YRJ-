@@ -155,7 +155,7 @@ public class TestAlphaCiv {
     assertThat(game.getCityAt(city_pos_two).getTreasury(), is(0));
 
     //Mimic end of round
-    game.setCurrentPlayerInTurn(Player.BLUE);
+    ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
     assertThat(game.getCityAt(city_pos).getTreasury(), is(6));
@@ -181,7 +181,7 @@ public class TestAlphaCiv {
   public void yearIncrements100()
   {
     //Mimic end of round
-    game.setCurrentPlayerInTurn(Player.BLUE);
+    ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
     assertThat(game.getAge(), is(-3900));
@@ -191,7 +191,7 @@ public class TestAlphaCiv {
   public void redWinsAge3000()
   {
     //set game to year 3000BC
-    game.setAge(3000);
+    ((GameImpl)(game)).setAge(3000);
 
     assertThat(game.getAge(), is(3000));
 
@@ -204,14 +204,14 @@ public class TestAlphaCiv {
   {
     Position city_of_red = new Position(1,1);
 
-    game.getCityAt(city_of_red).setTreasury(100);
+    ((CityImpl)(game.getCityAt(city_of_red))).setTreasury(100);
 
-    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
-    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
-    game.getCityAt(city_of_red).calculateProductionCost();
+    ((CityImpl)(game.getCityAt(city_of_red))).setWorkFocus(GameConstants.productionFocus);
+    ((CityImpl)(game.getCityAt(city_of_red))).setProductionType(GameConstants.ARCHER);
+    ((CityImpl)(game.getCityAt(city_of_red))).calculateProductionCost();
 
     //Mimic end of round
-    game.setCurrentPlayerInTurn(Player.BLUE);
+    ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
     assertThat(game.getUnitAt(city_of_red).getTypeString(), is(GameConstants.ARCHER));
@@ -223,18 +223,18 @@ public class TestAlphaCiv {
     Position city_of_red = new Position(1,1);
     Position pos_of_newUnit = new Position(1, 2);
 
-    game.getCityAt(city_of_red).setTreasury(100);
+    ((CityImpl)(game.getCityAt(city_of_red))).setTreasury(100);
 
-    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
-    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
-    game.getCityAt(city_of_red).calculateProductionCost();
+    ((CityImpl)(game.getCityAt(city_of_red))).setWorkFocus(GameConstants.productionFocus);
+    ((CityImpl)(game.getCityAt(city_of_red))).setProductionType(GameConstants.ARCHER);
+    ((CityImpl)(game.getCityAt(city_of_red))).calculateProductionCost();
 
     Unit temp = new UnitImpl(GameConstants.LEGION, Player.RED);
 
-    game.test_setUnitPosition(city_of_red, temp);
+    ((GameImpl)(game)).test_setUnitPosition(city_of_red, temp);
 
     //Mimic end of round
-    game.setCurrentPlayerInTurn(Player.BLUE);
+    ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
     assertThat(game.getUnitAt(pos_of_newUnit).getTypeString(), is(GameConstants.ARCHER));
@@ -245,19 +245,19 @@ public class TestAlphaCiv {
   {
     Position city_of_red = new Position(1,1);
 
-    game.getCityAt(city_of_red).setTreasury(100);
+    ((CityImpl)(game.getCityAt(city_of_red))).setTreasury(100);
 
-    game.getCityAt(city_of_red).setWorkFocus(GameConstants.productionFocus);
-    game.getCityAt(city_of_red).setProductionType(GameConstants.ARCHER);
-    game.getCityAt(city_of_red).calculateProductionCost();
+    ((CityImpl)(game.getCityAt(city_of_red))).setWorkFocus(GameConstants.productionFocus);
+    ((CityImpl)(game.getCityAt(city_of_red))).setProductionType(GameConstants.ARCHER);
+    ((CityImpl)(game.getCityAt(city_of_red))).calculateProductionCost();
 
-    assertThat(game.getCityAt(city_of_red).getTreasury(), is(100));
+    assertThat(((CityImpl)(game.getCityAt(city_of_red))).getTreasury(), is(100));
 
     //Mimic end of round
-    game.setCurrentPlayerInTurn(Player.BLUE);
+    ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
     game.endOfTurn();
 
-    assertThat(game.getCityAt(city_of_red).getTreasury(), is(96));
+    assertThat(((CityImpl)(game.getCityAt(city_of_red))).getTreasury(), is(96));
   }
 
   @Test
@@ -267,7 +267,7 @@ public class TestAlphaCiv {
     Position p0 = new Position(2,0);
     Position p1 = new Position(3,0);
     Unit RedLegion = new UnitImpl(GameConstants.LEGION,Player.RED);
-    game.test_setUnitPosition(p1,RedLegion);
+    ((GameImpl)(game)).test_setUnitPosition(p1,RedLegion);
 
     assertThat(game.moveUnit(p0,p1),is(false));
 
@@ -283,7 +283,7 @@ public class TestAlphaCiv {
     Position p0 = new Position(2,3);
     Position p1 = new Position(2,2);
     Unit BlueLegion = new UnitImpl(GameConstants.LEGION,Player.BLUE);
-    game.test_setUnitPosition(p0,BlueLegion);
+    ((GameImpl)(game)).test_setUnitPosition(p0,BlueLegion);
     assertThat(game.moveUnit(p0,p1),is(false));
 
     //cannot move to ocean
@@ -311,19 +311,19 @@ public class TestAlphaCiv {
     assertThat(game.moveUnit(p0,p2),is(true));
 
     Unit RedArcher = new UnitImpl(GameConstants.ARCHER,Player.RED);
-    game.test_setUnitPosition(p0,RedArcher);
+    ((GameImpl)(game)).test_setUnitPosition(p0,RedArcher);
 
     assertThat(game.moveUnit(p0,p3),is(false));
 
     assertThat(game.moveUnit(p0,p4),is(true));
 
     Unit RedArcher1 = new UnitImpl(GameConstants.ARCHER,Player.RED);
-    game.test_setUnitPosition(p0,RedArcher1);
+    ((GameImpl)(game)).test_setUnitPosition(p0,RedArcher1);
 
     assertThat(game.moveUnit(p0,p5),is(true));
 
     Unit RedArcher2 = new UnitImpl(GameConstants.ARCHER,Player.RED);
-    game.test_setUnitPosition(p0,RedArcher2);
+    ((GameImpl)(game)).test_setUnitPosition(p0,RedArcher2);
 
     assertThat(game.moveUnit(p0,p0),is(false));
   }

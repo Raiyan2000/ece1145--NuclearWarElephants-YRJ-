@@ -53,10 +53,10 @@ public class TestEpsilonCiv {
         Unit Archer = new UnitImpl(GameConstants.ARCHER,Player.RED);
         Unit Archer2 = new UnitImpl(GameConstants.ARCHER,Player.BLUE);
         Unit Settler = new UnitImpl(GameConstants.SETTLER,Player.RED);
-        game1.test_setUnitPosition(p1,Archer);
-        game1.test_setUnitPosition(p2,Settler);
-        game1.test_setUnitPosition(p3,Archer2);
-        game1.test_setUnitPosition(p4,Archer2);
+        ((GameImpl)(game1)).test_setUnitPosition(p1,Archer);
+        ((GameImpl)(game1)).test_setUnitPosition(p2,Settler);
+        ((GameImpl)(game1)).test_setUnitPosition(p3,Archer2);
+        ((GameImpl)(game1)).test_setUnitPosition(p4,Archer2);
 
         assertThat(attackObject.getTerrainFactor(game1,p1),is(1));
         assertThat(attackObject.getFriendlyUnitsFactor(game1,p1),is(1));

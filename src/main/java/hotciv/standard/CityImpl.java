@@ -24,7 +24,7 @@ public class CityImpl implements City{
         work_focus = workFocus;
         unit_production = null;
         treasury_of_city = 0;
-        calculateProductionCost();
+        this.calculateProductionCost();
     }
 
     public void incrementProductionPerRound(){

@@ -32,11 +32,9 @@ public interface Game {
   // === Accessor methods ===================================
 
   public void setCurrentPlayerInTurn(Player name);
-  public void test_setUnitPosition(Position pos, Unit troop);
-
-  public void checkAdjacentCityTiles(int x, int y);
-
-  public String getGameType();
+  //public void test_setUnitPosition(Position pos, Unit troop);
+  //public void checkAdjacentCityTiles(int x, int y);
+  //public String getGameType();
 
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.
@@ -80,7 +78,7 @@ public interface Game {
   public int getAge();
 
 
-  public void setAge(int x);
+  //public void setAge(int x);
 
   // === Mutator methods ======================================
   

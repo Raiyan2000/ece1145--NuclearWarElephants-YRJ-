@@ -2,6 +2,8 @@ package hotciv.framework;
 
 //import hotciv.standard.*;
 
+import hotciv.standard.GameImpl;
+
 public class ActionLogDecorator implements Game {
     private Game game;
 
@@ -11,22 +13,22 @@ public class ActionLogDecorator implements Game {
 
     //untouched
     public void setCurrentPlayerInTurn(Player name) {
-        game.setCurrentPlayerInTurn(name);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(name);
     }
 
     //untouched
     public void test_setUnitPosition(Position pos, Unit troop) {
-        game.test_setUnitPosition(pos, troop);
+        ((GameImpl)(game)).test_setUnitPosition(pos, troop);
     }
 
     //untouched
     public void checkAdjacentCityTiles(int x, int y) {
-        game.checkAdjacentCityTiles(x, y);
+        ((GameImpl)(game)).checkAdjacentCityTiles(x, y);
     }
 
     //untouched
     public String getGameType() {
-        return game.getGameType();
+        return ((GameImpl)(game)).getGameType();
     }
 
     //untouched
@@ -61,7 +63,7 @@ public class ActionLogDecorator implements Game {
 
     //untouched
     public void setAge(int x) {
-        game.setAge(x);
+        ((GameImpl)(game)).setAge(x);
     }
 
     //test

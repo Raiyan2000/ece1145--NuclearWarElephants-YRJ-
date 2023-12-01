@@ -166,7 +166,7 @@ public class GameImpl implements Game {
 
             //change owner of city in event of successful conquest
             if (world_board[to.getRow()][to.getColumn()].getCity() != null) {
-              world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(attackUnitOwner);
+              ((CityImpl)(world_board[to.getRow()][to.getColumn()].getCity())).setOwnerCity(attackUnitOwner);
             }
 
             winStrategy.setAttackWinCount(attackUnitOwner);
@@ -195,7 +195,7 @@ public class GameImpl implements Game {
         {
           //change city owner if successful conquest
           if (world_board[to.getRow()][to.getColumn()].getCity() != null) {
-            world_board[to.getRow()][to.getColumn()].getCity().setOwnerCity(initialUnit.getOwner());
+            ((CityImpl)(world_board[to.getRow()][to.getColumn()].getCity())).setOwnerCity(initialUnit.getOwner());
           }
         }
 
@@ -245,13 +245,13 @@ public class GameImpl implements Game {
           current_city = world_board[row][column].getCity();
 
           //Check if there is sufficient treasury to produce the unit
-          sufficient_treasury = current_city.getTreasury() > current_city.getProductionCost();
+          sufficient_treasury = current_city.getTreasury() > ((CityImpl)(current_city)).getProductionCost();
 
           //Check for production focus
           production_focused = current_city.getWorkforceFocus() == GameConstants.productionFocus;
 
           //Increment production of cities by 6
-          current_city.incrementProductionPerRound();
+          ((CityImpl)(current_city)).incrementProductionPerRound();
 
           //Check if city has enough treasury to produce specified unit
           if(sufficient_treasury && production_focused)
@@ -263,10 +263,10 @@ public class GameImpl implements Game {
             placeNewUnit(new_unit, row, column);
 
             //Remaining Treasury after unit cost
-            int remaining_treasury = current_city.getTreasury() - new_unit.getUnitCost();
+            int remaining_treasury = current_city.getTreasury() - ((UnitImpl)(new_unit)).getUnitCost();
 
             //Deduct unit cost from Treasury of city
-            current_city.setTreasury(remaining_treasury);
+            ((CityImpl)(current_city)).setTreasury(remaining_treasury);
           }
         }
       }

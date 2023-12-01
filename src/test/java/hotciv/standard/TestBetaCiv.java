@@ -67,9 +67,9 @@ public class TestBetaCiv {
 
     @Test
     public void Age4000BC() {
-        game.setAge(-4000);
+        ((GameImpl)(game)).setAge(-4000);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(-3900));
@@ -78,9 +78,9 @@ public class TestBetaCiv {
     @Test
     public void Age100BC() {
         //set age to 100
-        game.setAge(-100);
+        ((GameImpl)(game)).setAge(-100);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(-1));
@@ -89,9 +89,9 @@ public class TestBetaCiv {
     @Test
     public void AgeN1BC() {
         //set age to -1
-        game.setAge(-1);
+        ((GameImpl)(game)).setAge(-1);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(1));
@@ -100,9 +100,9 @@ public class TestBetaCiv {
     @Test
     public void Age1BC() {
         //set age to 1
-        game.setAge(1);
+        ((GameImpl)(game)).setAge(1);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(50));
@@ -112,9 +112,9 @@ public class TestBetaCiv {
     public void Age50AD() {
         //set the age to 50 AD
         //using negative numbers to represent BC
-        game.setAge(50);
+        ((GameImpl)(game)).setAge(50);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(100));
@@ -124,9 +124,9 @@ public class TestBetaCiv {
     public void Age1750AD() {
         //set the age to 1750 AD
         //using negative numbers to represent BC
-        game.setAge(1750);
+        ((GameImpl)(game)).setAge(1750);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(1775));
@@ -136,9 +136,9 @@ public class TestBetaCiv {
     public void Age1900AD() {
         //set the age to 1900 AD
         //using negative numbers to represent BC
-        game.setAge(1900);
+        ((GameImpl)(game)).setAge(1900);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(1905));
@@ -148,9 +148,9 @@ public class TestBetaCiv {
     public void Age1970AD() {
         //set the age to 1970 AD
         //using negative numbers to represent BC
-        game.setAge(1970);
+        ((GameImpl)(game)).setAge(1970);
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((GameImpl)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(1971));
