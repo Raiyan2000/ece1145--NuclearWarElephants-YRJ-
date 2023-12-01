@@ -60,6 +60,8 @@ public class GameImpl implements Game {
 
   private int BlueAttackWins;
 
+  private CityPopulationStrategy CityPop;
+
   //Initialized  World board as an array
   private TileImpl[][] world_board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 
