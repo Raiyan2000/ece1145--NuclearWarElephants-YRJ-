@@ -143,6 +143,6 @@ public interface Game {
    */
   public void performUnitActionAt( Position p );
 
-  public int GetNumAttackWins(Player p);
+  //public int GetNumAttackWins(Player p);
 
 }

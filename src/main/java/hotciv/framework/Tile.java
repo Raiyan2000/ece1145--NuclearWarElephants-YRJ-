@@ -44,7 +44,7 @@ public interface Tile {
 
   public City getCity();
 
-  public void removeCity();
+  //public void removeCity();
 
-  public void setCityOwner(Player name);
+  //public void setCityOwner(Player name);
 }

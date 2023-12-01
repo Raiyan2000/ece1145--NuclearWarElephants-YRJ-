@@ -57,28 +57,28 @@ public interface Unit {
    */
   public int getMoveCount();
 
-  public void setMoveCount(int moves);
+  //public void setMoveCount(int moves);
   
   /** return the defensive strength of this unit
    * @return defensive strength
    */
   public int getDefensiveStrength();
 
-  public void setDefensiveStrength(int defense);
+  //public void setDefensiveStrength(int defense);
   
   /** return the attack strength of this unit
    * @return attack strength
    */
   public int getAttackingStrength();
 
-  public void setAttackingStrength(int offense);
+  //public void setAttackingStrength(int offense);
 
-  public int getArcherState();
+  //public int getArcherState();
 
-  public void setArcherState(int fortify_status);
+  //public void setArcherState(int fortify_status);
 
-  public void setUnitMovementType(String movement);
+  //public void setUnitMovementType(String movement);
 
-  public String getUnitMovementType();
+  //public String getUnitMovementType();
 
 }

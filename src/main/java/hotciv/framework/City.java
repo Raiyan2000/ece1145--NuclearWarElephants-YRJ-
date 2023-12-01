@@ -71,10 +71,10 @@ public interface City {
    */
   public String getWorkforceFocus();
 
-  public void setPopulation(int people);
+  //public void setPopulation(int people);
 
-  public int getPopulation();
+  //public int getPopulation();
 
-  public void setProduction(String unit);
+  //public void setProduction(String unit);
 
 }

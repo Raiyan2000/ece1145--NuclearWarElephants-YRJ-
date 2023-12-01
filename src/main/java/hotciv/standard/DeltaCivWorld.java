@@ -40,7 +40,7 @@ public class DeltaCivWorld implements WorldLayout {
         }
 
         //Set city owners and city objects
-        board[8][12].setCityOwner(Player.RED);
-        board[4][5].setCityOwner(Player.BLUE);
+        ((TileImpl)board[8][12]).setCityOwner(Player.RED);
+        ((TileImpl)board[4][5]).setCityOwner(Player.BLUE);
     }
 }

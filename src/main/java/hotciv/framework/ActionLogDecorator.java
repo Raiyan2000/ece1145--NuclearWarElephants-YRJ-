@@ -106,6 +106,6 @@ public class ActionLogDecorator implements Game {
 
     //untouched
     public int GetNumAttackWins(Player p) {
-        return game.GetNumAttackWins(p);
+        return ((GameImpl)game).GetNumAttackWins(p);
     }
 }

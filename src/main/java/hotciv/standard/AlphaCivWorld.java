@@ -50,7 +50,7 @@ public class AlphaCivWorld implements WorldLayout {
         board[4][3].setUnitType(settler);
 
         //Set city owners and city objects
-        board[1][1].setCityOwner(Player.RED);
-        board[4][1].setCityOwner(Player.BLUE);
+        ((TileImpl)board[1][1]).setCityOwner(Player.RED);
+        ((TileImpl)board[4][1]).setCityOwner(Player.BLUE);
     }
 }

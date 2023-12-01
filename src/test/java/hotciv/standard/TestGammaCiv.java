@@ -27,7 +27,7 @@ public class TestGammaCiv {
         assertThat(currUnit.getTypeString(), is(GameConstants.ARCHER));
         game.performUnitActionAt(city_pos);
         //fortify status should be on
-        assertThat(currUnit.getArcherState(), is(1));
+        assertThat(((UnitImpl)currUnit).getArcherState(), is(1));
         //defensive value should be twice as original
         assertThat(currUnit.getDefensiveStrength(), is(6));
         //make sure unit is immobile
@@ -36,7 +36,7 @@ public class TestGammaCiv {
         //If action performed again, stats should return to original
         game.performUnitActionAt(city_pos);
         //fortify should be removed
-        assertThat(currUnit.getArcherState(), is(0));
+        assertThat(((UnitImpl)currUnit).getArcherState(), is(0));
         //defensive value should be halved
         assertThat(currUnit.getDefensiveStrength(), is(3));
         //make sure unit is mobile
@@ -55,7 +55,7 @@ public class TestGammaCiv {
         //make sure settler unit is removed
         assertThat(game.getUnitAt(p),is(nullValue()));
         //make sure city population is 1
-        assertThat(game.getCityAt(p).getPopulation(),is(1));
+        assertThat(((CityImpl)game.getCityAt(p)).getPopulation(),is(1));
         //make sure owner is still the same
         assertThat(game.getCityAt(p).getOwner(),is(Player.RED));
     }

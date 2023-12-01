@@ -150,7 +150,7 @@ public class GameImpl implements Game {
 
 
       //check initial unit movement type
-      String movementType = initialUnit.getUnitMovementType();
+      String movementType = ((UnitImpl)initialUnit).getUnitMovementType();
 
       if(defendingUnit != null) {
         Player defendingUnitOwner = defendingUnit.getOwner();
@@ -292,7 +292,7 @@ public class GameImpl implements Game {
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType )
   {
-    world_board[p.getRow()][p.getColumn()].getCity().setProduction(unitType);
+    ((CityImpl)world_board[p.getRow()][p.getColumn()].getCity()).setProduction(unitType);
   }
   public void performUnitActionAt( Position p )
   {
