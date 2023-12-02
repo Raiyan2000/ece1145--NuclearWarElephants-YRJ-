@@ -108,4 +108,14 @@ public class ActionLogDecorator implements Game {
     public int GetNumAttackWins(Player p) {
         return ((GameImpl)game).GetNumAttackWins(p);
     }
+
+    @Override
+    public void addObserver(GameObserver observer) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
+    }
 }
