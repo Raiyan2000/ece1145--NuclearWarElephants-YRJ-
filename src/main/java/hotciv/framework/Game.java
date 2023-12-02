@@ -31,7 +31,7 @@ package hotciv.framework;
 public interface Game {
   // === Accessor methods ===================================
 
-  public void setCurrentPlayerInTurn(Player name);
+  //public void setCurrentPlayerInTurn(Player name);
   //public void test_setUnitPosition(Position pos, Unit troop);
   //public void checkAdjacentCityTiles(int x, int y);
   //public String getGameType();

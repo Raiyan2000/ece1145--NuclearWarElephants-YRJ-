@@ -75,7 +75,7 @@ public class TestActionLog {
     public void yearIncrements100()
     {
         //Mimic end of round
-        game.setCurrentPlayerInTurn(Player.BLUE);
+        ((ActionLogDecorator)(game)).setCurrentPlayerInTurn(Player.BLUE);
         game.endOfTurn();
 
         assertThat(game.getAge(), is(-3900));
