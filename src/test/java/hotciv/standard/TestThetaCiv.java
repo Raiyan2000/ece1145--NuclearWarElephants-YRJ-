@@ -23,9 +23,9 @@ public class TestThetaCiv {
     {
         Position p = new Position(2,5);
         ((TileImpl)game.getTileAt(p)).setCityOwner(Player.BLUE);
-        assertThat(game.getTileAt(p).getCity().getOwner(),is(Player.BLUE));
+        assertThat(((TileImpl)(game.getTileAt(p))).getCity().getOwner(),is(Player.BLUE));
         game.changeProductionInCityAt(p,GameConstants.UFO);
-        assertThat(game.getTileAt(p).getCity().getProduction(),is(GameConstants.UFO));
+        assertThat(((TileImpl)(game.getTileAt(p))).getCity().getProduction(),is(GameConstants.UFO));
     }
 
     public void ufoMovementWithoutDefendingUnit()

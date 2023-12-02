@@ -42,7 +42,7 @@ public interface Tile {
   //public void setTypeString(String type);
   //public Unit getUnit();
 
-  public City getCity();
+  //public City getCity();
 
   //public void removeCity();
 
