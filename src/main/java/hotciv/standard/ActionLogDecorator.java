@@ -1,7 +1,8 @@
-package hotciv.framework;
+package hotciv.standard;
 
 //import hotciv.standard.*;
 
+import hotciv.framework.*;
 import hotciv.standard.GameImpl;
 
 public class ActionLogDecorator implements Game {

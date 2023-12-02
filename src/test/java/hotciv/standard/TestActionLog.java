@@ -6,7 +6,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import java.util.*;
 public class TestActionLog {
     private Game game;
 
