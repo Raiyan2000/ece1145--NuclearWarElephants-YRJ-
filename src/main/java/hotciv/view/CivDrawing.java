@@ -1,5 +1,6 @@
 package hotciv.view;
 
+
 import hotciv.framework.*;
 import minidraw.framework.*;
 import minidraw.standard.*;
