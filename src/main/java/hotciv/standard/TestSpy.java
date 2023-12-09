@@ -6,10 +6,10 @@ import hotciv.framework.Position;
 
 public class TestSpy implements GameObserver {
 
-    Position worldChangePosition, tileFocusChange;
-    Player next_player;
+    public Position worldChangePosition, tileFocusChange;
+    public Player next_player;
 
-    int gameAge;
+    public int gameAge;
     public void worldChangedAt(Position pos)
     {
         worldChangePosition = pos;
@@ -18,6 +18,7 @@ public class TestSpy implements GameObserver {
     public void turnEnds(Player nextPlayer, int age)
     {
         gameAge = age;
+        next_player = nextPlayer;
     }
     public void tileFocusChangedAt(Position position)
     {

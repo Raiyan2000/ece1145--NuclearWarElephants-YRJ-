@@ -176,8 +176,9 @@ public class GameImpl implements Game {
             winStrategy.setAttackWinCount(attackUnitOwner);
 
             //update the gui game board
-            civGameObserver.worldChangedAt(to);
             civGameObserver.worldChangedAt(from);
+            civGameObserver.worldChangedAt(to);
+
 
             return true;
           }
@@ -202,8 +203,9 @@ public class GameImpl implements Game {
         world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
         world_board[from.getRow()][from.getColumn()].setUnitType(null);
 
-        civGameObserver.worldChangedAt(to);
         civGameObserver.worldChangedAt(from);
+        civGameObserver.worldChangedAt(to);
+
 
         if(movementType.equals(GameConstants.GROUND))
         {
@@ -234,12 +236,17 @@ public class GameImpl implements Game {
 
   public void placeNewUnit(Unit new_unit, int row, int column)
   {
+    Position openTilePosition;
     if(world_board[row][column].getUnit() == null)
     {
       world_board[row][column].setUnitType(new_unit);
+      openTilePosition = new Position(row, column);
+      civGameObserver.worldChangedAt(openTilePosition);
     }
     else {
       world_board[row][column+1].setUnitType(new_unit);
+      openTilePosition = new Position(row, column);
+      civGameObserver.worldChangedAt(openTilePosition);
     }
   }
   public void endOfRound()
@@ -301,6 +308,8 @@ public class GameImpl implements Game {
 
       current_player_turn = Player.RED;
     }
+
+    civGameObserver.turnEnds(current_player_turn, age);
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
