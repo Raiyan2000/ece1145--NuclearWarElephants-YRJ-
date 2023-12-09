@@ -56,6 +56,8 @@ public class GameImpl implements Game {
 
   private AttackStrategy attackStrategyObject;
 
+  GameObserver civGameObserver;
+
   private int RedAttackWins;
 
   private int BlueAttackWins;
@@ -89,6 +91,8 @@ public class GameImpl implements Game {
     winStrategy = factory.createWinStrategy();
 
     attackStrategyObject = factory.createAttackStrategy();
+
+    civGameObserver = new NullGameObserver();
 
   }
 
@@ -317,12 +321,12 @@ public class GameImpl implements Game {
 
   @Override
   public void addObserver(GameObserver observer) {
-
+    civGameObserver = observer;
   }
 
   @Override
   public void setTileFocus(Position position) {
-
+    civGameObserver.tileFocusChangedAt(position);
   }
 }
 
