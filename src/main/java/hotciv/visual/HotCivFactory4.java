@@ -15,6 +15,8 @@ class HotCivFactory4 implements Factory {
   public DrawingView createDrawingView( DrawingEditor editor ) {
     DrawingView view = 
       new MapView(editor, game);
+
+
     return view;
   }
 
