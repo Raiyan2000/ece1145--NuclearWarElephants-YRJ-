@@ -135,6 +135,7 @@ public class StubGame2 implements Game {
 
   public void setTileFocus(Position position) {
     // TODO: setTileFocus implementation pending.
+    gameObserver.tileFocusChangedAt(position);
     System.out.println("-- StubGame2 / setTileFocus called.");
     System.out.println(" *** IMPLEMENTATION PENDING ***");
   }
