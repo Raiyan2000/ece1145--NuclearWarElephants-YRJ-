@@ -174,12 +174,19 @@ public class GameImpl implements Game {
             }
 
             winStrategy.setAttackWinCount(attackUnitOwner);
+
+            //update the gui game board
+            civGameObserver.worldChangedAt(to);
+            civGameObserver.worldChangedAt(from);
+
             return true;
           }
           else
           {
             //attack failed, so remove initial attacking unit from board
             world_board[from.getRow()][from.getColumn()].setUnitType(null);
+            civGameObserver.worldChangedAt(to);
+
             return false;
           }
         }
@@ -194,6 +201,9 @@ public class GameImpl implements Game {
         //no defending unit, so just place new unit on new tile and remove old unit
         world_board[to.getRow()][to.getColumn()].setUnitType(initialUnit);
         world_board[from.getRow()][from.getColumn()].setUnitType(null);
+
+        civGameObserver.worldChangedAt(to);
+        civGameObserver.worldChangedAt(from);
 
         if(movementType.equals(GameConstants.GROUND))
         {
