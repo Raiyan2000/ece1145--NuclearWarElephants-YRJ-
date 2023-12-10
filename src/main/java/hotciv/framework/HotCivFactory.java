@@ -11,4 +11,6 @@ public interface HotCivFactory {
     public WinStrategy createWinStrategy();
 
     public AttackStrategy createAttackStrategy();
+
+    public ProductionStrategy createProductionStrategy();
 }

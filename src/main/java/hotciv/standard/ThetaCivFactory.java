@@ -23,4 +23,9 @@ public class ThetaCivFactory implements HotCivFactory {
         return new Age3000Winner();
     }
     public AttackStrategy createAttackStrategy(){return new AttackerWinsAttack();}
+
+    public ProductionStrategy createProductionStrategy()
+    {
+        return new NullProductionStrategy();
+    }
 }

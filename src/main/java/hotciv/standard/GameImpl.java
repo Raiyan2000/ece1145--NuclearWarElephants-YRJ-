@@ -58,6 +58,8 @@ public class GameImpl implements Game {
 
   GameObserver civGameObserver;
 
+  ProductionStrategy civProductionStrategy;
+
   private int RedAttackWins;
 
   private int BlueAttackWins;
@@ -92,6 +94,8 @@ public class GameImpl implements Game {
 
     attackStrategyObject = factory.createAttackStrategy();
 
+    civProductionStrategy = factory.createProductionStrategy();
+
     civGameObserver = new NullGameObserver();
 
   }
@@ -106,6 +110,10 @@ public class GameImpl implements Game {
 
   public void test_setUnitPosition(Position pos, Unit troop){
     world_board[pos.getRow()][pos.getColumn()].setUnitType(troop);
+  }
+
+  public void test_setCityPosition(Position pos, Player colour){
+    world_board[pos.getRow()][pos.getColumn()].setCityOwner(colour);
   }
 
   public void checkAdjacentCityTiles(int x, int y) {
@@ -274,20 +282,40 @@ public class GameImpl implements Game {
           //Increment production of cities by 6
           ((CityImpl)(current_city)).incrementProductionPerRound();
 
-          //Check if city has enough treasury to produce specified unit
-          if(sufficient_treasury && production_focused)
+          if(production_focused)
           {
-            // Create new unit
-            Unit new_unit = new UnitImpl(current_city.getProduction(), current_city.getOwner());
+            //Get production increase
+            int temp_production_increase = civProductionStrategy.getProductionIncrease(current_city.getSize(), world_board, new Position(row,column));
 
-            //Placing new created unit at proper tile
-            placeNewUnit(new_unit, row, column);
+            //Increment production depending on tile factors
+            ((CityImpl)current_city).incrementProductionCount(temp_production_increase);
 
-            //Remaining Treasury after unit cost
-            int remaining_treasury = current_city.getTreasury() - ((UnitImpl)(new_unit)).getUnitCost();
+            if(sufficient_treasury)
+            {
+              // Create new unit
+              Unit new_unit = new UnitImpl(current_city.getProduction(), current_city.getOwner());
 
-            //Deduct unit cost from Treasury of city
-            ((CityImpl)(current_city)).setTreasury(remaining_treasury);
+              //Placing new created unit at proper tile
+              placeNewUnit(new_unit, row, column);
+
+              //Remaining Treasury after unit cost
+              int remaining_treasury = current_city.getTreasury() - ((UnitImpl)(new_unit)).getUnitCost();
+
+              //Deduct unit cost from Treasury of city
+              ((CityImpl)(current_city)).setTreasury(remaining_treasury);
+
+            }
+          }
+
+          // If food Focused
+          if(!production_focused)
+          {
+            //Get food increase
+            int temp_food_increase = civProductionStrategy.getFoodIncrease(current_city.getSize(), world_board, new Position(row,column));
+
+            //Increment food depending on tile factors
+            ((CityImpl)current_city).incrementFoodCount(temp_food_increase);
+
           }
         }
       }

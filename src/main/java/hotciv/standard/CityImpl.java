@@ -16,6 +16,7 @@ public class CityImpl implements City{
 
     private int production_cost;
 
+    private int food_count;
 
 
     public CityImpl(Player name, String workFocus) {
@@ -24,11 +25,20 @@ public class CityImpl implements City{
         work_focus = workFocus;
         unit_production = null;
         treasury_of_city = 0;
+        food_count = 0;
         this.calculateProductionCost();
     }
 
     public void incrementProductionPerRound(){
         treasury_of_city += 6;
+    }
+
+    public void incrementFoodCount(int val){
+        food_count += val;
+    }
+
+    public void incrementProductionCount(int val){
+        treasury_of_city += val;
     }
 
     public void setWorkFocus(String type){
@@ -107,4 +117,10 @@ public class CityImpl implements City{
     {
         return population_size;
     }
+
+    public int getFoodCount()
+    {
+        return food_count;
+    }
+
 }

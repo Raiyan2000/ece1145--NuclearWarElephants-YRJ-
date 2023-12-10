@@ -24,4 +24,9 @@ public class ZetaCivFactory implements HotCivFactory {
     }
 
     public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
+
+    public ProductionStrategy createProductionStrategy()
+    {
+        return new NullProductionStrategy();
+    }
 }

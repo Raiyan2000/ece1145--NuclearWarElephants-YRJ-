@@ -2,7 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class AlphaCivFactory implements HotCivFactory {
+public class EtaCivFactory implements HotCivFactory {
+
     public WorldLayout createWorldLayout()
     {
         return new AlphaCivWorld();
@@ -26,6 +27,6 @@ public class AlphaCivFactory implements HotCivFactory {
 
     public ProductionStrategy createProductionStrategy()
     {
-        return new NullProductionStrategy();
+        return new EtaCivProductionStrategy();
     }
 }

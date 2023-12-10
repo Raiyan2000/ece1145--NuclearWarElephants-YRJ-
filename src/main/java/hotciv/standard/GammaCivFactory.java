@@ -24,4 +24,9 @@ public class GammaCivFactory implements HotCivFactory {
     }
 
     public AttackStrategy createAttackStrategy(){return new AttackerWinsAttack();}
+
+    public ProductionStrategy createProductionStrategy()
+    {
+        return new NullProductionStrategy();
+    }
 }

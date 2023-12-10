@@ -25,4 +25,9 @@ public class EpsilonCivFactory implements HotCivFactory {
     }
 
     public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
+
+    public ProductionStrategy createProductionStrategy()
+    {
+        return new NullProductionStrategy();
+    }
 }
