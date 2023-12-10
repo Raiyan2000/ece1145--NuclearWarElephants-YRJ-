@@ -51,6 +51,9 @@ public class CivDrawing
   /** store all moveable figures visible in this drawing = units */
   protected Map<Unit,UnitFigure> unitFigureMap;
 
+  /**stores city figures in this drawing */
+  protected Map<City,CityFigure> unitCityMap;
+
   /** the Game instance that this CivDrawing is going to render units
    * from */
   protected Game game;
@@ -139,7 +142,7 @@ public class CivDrawing
   protected ImageFigure turnShieldIcon;
   protected ImageFigure unitShieldIcon;
   protected ImageFigure cityShieldIcon;
-  protected ImageFigure ageIcon;
+  protected TextFigure ageIcon;
   protected ImageFigure refreshIcon;
   protected ImageFigure productionIcon;
   protected ImageFigure unitInfoIcon;
@@ -184,7 +187,23 @@ public class CivDrawing
     delegate.add(refreshIcon);
 
     //add age information icon
-    ageIcon = new ImageFigure("black",new Point(GfxConstants.AGE_TEXT_X,GfxConstants.AGE_TEXT_Y));
+    int age = game.getAge();
+
+    //checks if age should be BC or AD
+    if(age>0) {
+      String year = Integer.toString(game.getAge()); //obtain Age of Game
+      ageIcon = new TextFigure(year+" AD", new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
+    }
+    else if(age == 0)
+    {
+      String year = Integer.toString(game.getAge()); //obtain Age of Game
+      ageIcon = new TextFigure(year, new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
+    }
+    else
+    {
+      String year = Integer.toString(Math.abs(age));
+      ageIcon = new TextFigure(year+" BC", new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
+    }
     delegate.add(ageIcon);
 
     //add production information icon
@@ -211,6 +230,7 @@ public class CivDrawing
     defineUnitMap();
 
     // TODO: Cities may change on position as well
+    requestUpdate();
   }
 
   public void turnEnds(Player nextPlayer, int age) {
@@ -228,6 +248,46 @@ public class CivDrawing
     // TODO: Implementation pending
     System.out.println( "Fake it: tileFocusChangedAt "+position );
 
+    //obtain the city or unit or both at the position
+    Unit changedUnit = game.getUnitAt(position);
+    City changedCity = game.getCityAt(position);
+
+    //puts number of moves onto the display screen on right side
+    if(changedUnit != null) {
+      TextFigure movesLeft = new TextFigure(Integer.toString(changedUnit.getMoveCount()), new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
+      delegate.add(movesLeft);
+    }
+
+    if(changedCity != null)
+    {
+      if(changedCity.getWorkforceFocus().equals(GameConstants.productionFocus))
+      {
+        workforceFocusIcon = new ImageFigure("hammer",new Point(GfxConstants.WORKFORCEFOCUS_X,GfxConstants.WORKFORCEFOCUS_Y));
+      }
+      else
+      {
+        workforceFocusIcon = new ImageFigure("apple",new Point(GfxConstants.WORKFORCEFOCUS_X,GfxConstants.WORKFORCEFOCUS_Y));
+      }
+      delegate.add(workforceFocusIcon);
+
+      if(changedCity.getProduction().equals(GameConstants.LEGION))
+      {
+        productionIcon = new ImageFigure("legion",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
+      }
+      else if(changedCity.getProduction().equals(GameConstants.SETTLER))
+      {
+        productionIcon = new ImageFigure("settler",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
+      }
+      else
+      {
+        productionIcon = new ImageFigure("archer",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
+      }
+      delegate.add(productionIcon);
+
+    }
+
+
+
   }
 
   @Override
@@ -238,6 +298,32 @@ public class CivDrawing
     defineUnitMap();
     defineIcons();
     // TODO: Cities pending
+    for(int i=0;i<GameConstants.WORLDSIZE;i++) {
+      for(int j=0;j<GameConstants.WORLDSIZE;j++) {
+
+        Position coordinate = new Position(i,j);
+
+        //check for newly built city
+        City newCity = game.getCityAt(coordinate);
+
+        if(newCity != null) {
+
+          //convert game coordinates into pixel coordinates
+          Point cityPoint = new Point(GfxConstants.getXFromColumn(coordinate.getColumn()),
+                  GfxConstants.getYFromRow(coordinate.getRow()));
+
+          //create a city object
+          CityFigure cityFig = new CityFigure(newCity, cityPoint);
+
+          //add city onto the game map
+          cityFig.addFigureChangeListener(this);
+          unitCityMap.put(newCity, cityFig);
+        }
+      }
+    }
+
+
+
   }
 
   @Override
