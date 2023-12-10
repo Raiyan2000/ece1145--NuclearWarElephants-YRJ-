@@ -137,15 +137,68 @@ public class CivDrawing
   }
 
   protected ImageFigure turnShieldIcon;
+  protected ImageFigure unitShieldIcon;
+  protected ImageFigure cityShieldIcon;
+  protected ImageFigure ageIcon;
+  protected ImageFigure refreshIcon;
+  protected ImageFigure productionIcon;
+  protected ImageFigure unitInfoIcon;
+  protected ImageFigure workforceFocusIcon;
+
   protected void defineIcons() {
-    // TODO: Further development to include rest of figures needed
-    turnShieldIcon = 
-      new ImageFigure( "redshield",
-                       new Point( GfxConstants.TURN_SHIELD_X,
-                                  GfxConstants.TURN_SHIELD_Y ) ); 
-    // insert in delegate figure list to ensure graphical
-    // rendering.
-    delegate.add(turnShieldIcon);
+
+    if(game.getPlayerInTurn() == Player.RED) {
+      turnShieldIcon =
+              new ImageFigure("redshield",
+                      new Point(GfxConstants.TURN_SHIELD_X,
+                              GfxConstants.TURN_SHIELD_Y));
+      // insert in delegate figure list to ensure graphical
+      // rendering.
+      delegate.add(turnShieldIcon);
+
+      //adds the red player unit shield icon onto map
+      unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
+      delegate.add(unitShieldIcon);
+
+      //adds the red player city shield icon onto map
+      cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
+      delegate.add(cityShieldIcon);
+    }
+    else
+    {
+      //blue city shield at top
+      turnShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.TURN_SHIELD_X,GfxConstants.TURN_SHIELD_Y));
+      delegate.add(turnShieldIcon);
+
+      //blue unit shield
+      unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
+      delegate.add(unitShieldIcon);
+
+      //blue city shield
+      cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
+      delegate.add(cityShieldIcon);
+    }
+
+    //add refresh button onto the game
+    refreshIcon = new ImageFigure("refresh",new Point(GfxConstants.REFRESH_BUTTON_X, GfxConstants.REFRESH_BUTTON_Y));
+    delegate.add(refreshIcon);
+
+    //add age information icon
+    ageIcon = new ImageFigure("black",new Point(GfxConstants.AGE_TEXT_X,GfxConstants.AGE_TEXT_Y));
+    delegate.add(ageIcon);
+
+    //add production information icon
+    productionIcon = new ImageFigure("black",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
+    delegate.add(productionIcon);
+
+    //add unit info icon
+    unitInfoIcon = new ImageFigure("black",new Point(GfxConstants.UNIT_COUNT_X,GfxConstants.UNIT_COUNT_Y));
+    delegate.add(unitInfoIcon);
+
+    //add workforce focus icon
+    workforceFocusIcon = new ImageFigure("black",new Point(GfxConstants.WORKFORCEFOCUS_X,GfxConstants.WORKFORCEFOCUS_Y));
+    delegate.add(workforceFocusIcon);
+
   }
  
   // === Observer Methods ===
@@ -174,6 +227,7 @@ public class CivDrawing
   public void tileFocusChangedAt(Position position) {
     // TODO: Implementation pending
     System.out.println( "Fake it: tileFocusChangedAt "+position );
+
   }
 
   @Override
