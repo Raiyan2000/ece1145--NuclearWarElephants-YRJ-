@@ -30,4 +30,6 @@ public class BetaCivFactory implements HotCivFactory {
     {
         return new NullProductionStrategy();
     }
+
+    public CityPopulationStrategy createPopulationStrategy(){return new NullPopulationStrategy();}
 }

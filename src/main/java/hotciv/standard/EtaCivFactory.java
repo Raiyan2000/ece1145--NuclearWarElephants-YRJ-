@@ -29,4 +29,6 @@ public class EtaCivFactory implements HotCivFactory {
     {
         return new EtaCivProductionStrategy();
     }
+
+    public CityPopulationStrategy createPopulationStrategy(){return new FoodIncreasePopulationStrategy();}
 }

@@ -96,6 +96,8 @@ public class GameImpl implements Game {
 
     civProductionStrategy = factory.createProductionStrategy();
 
+    CityPop = factory.createPopulationStrategy();
+
     civGameObserver = new NullGameObserver();
 
   }
@@ -317,6 +319,8 @@ public class GameImpl implements Game {
             ((CityImpl)current_city).incrementFoodCount(temp_food_increase);
 
           }
+
+          CityPop.UpdatePopulationAndFood(current_city);
         }
       }
     }

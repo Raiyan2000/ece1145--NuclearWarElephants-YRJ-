@@ -123,4 +123,9 @@ public class CityImpl implements City{
         return food_count;
     }
 
+    public void resetFoodCount()
+    {
+        food_count = 0;
+    }
+
 }

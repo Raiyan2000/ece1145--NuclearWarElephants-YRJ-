@@ -29,4 +29,6 @@ public class ZetaCivFactory implements HotCivFactory {
     {
         return new NullProductionStrategy();
     }
+
+    public CityPopulationStrategy createPopulationStrategy(){return new NullPopulationStrategy();}
 }

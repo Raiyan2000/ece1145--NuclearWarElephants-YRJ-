@@ -116,7 +116,7 @@ public class TestEtaCiv {
         assertThat(((CityImpl) game.getCityAt(new Position(0,0))).getFoodCount(), is(0));
         assertThat(game.getCityAt(new Position(0,0)).getSize(), is(1));
 
-        //Set Population to 6
+        //Set Population to 3
         ((CityImpl)game.getCityAt(new Position(0,0))).setPopulation(3);
 
         //Simulate end of round
@@ -131,20 +131,20 @@ public class TestEtaCiv {
         assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(5));
 
     }
-
+    @Test
     public void TestCityAtTopLeftCornerProductionFocusPopulation2() {
         // Set the city and Check for city in correct position
         ((GameImpl)game).test_setCityPosition(new Position(0,0), Player.RED);
         assertThat(game.getCityAt(new Position(0,0)), is(notNullValue()));
 
         //Set city to production focus
-        ((CityImpl)game.getCityAt(new Position(0,0))).setWorkFocus(GameConstants.productionFocus);
+        ((CityImpl)game.getCityAt(new Position(0,0))).setWorkFocus(GameConstants.foodFocus);
 
         //Check initial treasury
         assertThat(((CityImpl) game.getCityAt(new Position(0,0))).getFoodCount(), is(0));
         assertThat(game.getCityAt(new Position(0,0)).getSize(), is(1));
 
-        //Set Population to 6
+        //Set Population to 2
         ((CityImpl)game.getCityAt(new Position(0,0))).setPopulation(2);
 
         //Simulate end of round
@@ -156,7 +156,77 @@ public class TestEtaCiv {
             by 4 since the population is 2 and the best terrains are one hill and the city.
          */
 
-        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(3));
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(4));
+
+
+    }
+
+    @Test
+    public void TestFoodResetToZeroAndPopulationIncrease() {
+        // Set the city and Check for city in correct position
+        ((GameImpl)game).test_setCityPosition(new Position(0,0), Player.RED);
+        assertThat(game.getCityAt(new Position(0,0)), is(notNullValue()));
+
+        //Set city to production focus
+        ((CityImpl)game.getCityAt(new Position(0,0))).setWorkFocus(GameConstants.foodFocus);
+
+        //Check initial treasury
+        assertThat(((CityImpl) game.getCityAt(new Position(0,0))).getFoodCount(), is(0));
+        assertThat(game.getCityAt(new Position(0,0)).getSize(), is(1));
+
+        //Set city population to 2
+        ((CityImpl)game.getCityAt(new Position(0,0))).setPopulation(2);
+
+        //max food count is 5+3*2 = 11
+
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(4));
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getPopulation(),is(2));
+
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(8));
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getPopulation(),is(2));
+
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getFoodCount(), is(0));
+        assertThat(((CityImpl) game.getCityAt(new Position(0, 0))).getPopulation(),is(3));
+
+    }
+
+    @Test
+    public void TestFoodResetToZero() {
+        // Set the city and Check for city in correct position
+        ((GameImpl)game).test_setCityPosition(new Position(1,1), Player.RED);
+        assertThat(game.getCityAt(new Position(1,1)), is(notNullValue()));
+
+        //Set city to production focus
+        ((CityImpl)game.getCityAt(new Position(1,1))).setWorkFocus(GameConstants.foodFocus);
+
+        //Check initial treasury
+        assertThat(((CityImpl) game.getCityAt(new Position(1,1))).getFoodCount(), is(0));
+        assertThat(game.getCityAt(new Position(1,1)).getSize(), is(1));
+
+        //Set city population to 2
+        ((CityImpl)game.getCityAt(new Position(1,1))).setPopulation(9);
+
+        //max food count is 5+3*9 = 32
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertThat(((CityImpl) game.getCityAt(new Position(1, 1))).getFoodCount(), is(17));
+        assertThat(((CityImpl) game.getCityAt(new Position(1, 1))).getPopulation(),is(9));
+
+        game.endOfTurn();
+        game.endOfTurn();
+
+        assertThat(((CityImpl) game.getCityAt(new Position(1, 1))).getFoodCount(), is(0));
+        assertThat(((CityImpl) game.getCityAt(new Position(1, 1))).getPopulation(),is(9));
 
     }
 }

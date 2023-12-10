@@ -2,7 +2,5 @@ package hotciv.framework;
 
 public interface CityPopulationStrategy
 {
-    public int checkFoodTotal();
-
-    public void IncreaseCityPopulation();
+    public void UpdatePopulationAndFood(City cityToBeUpdated);
 }

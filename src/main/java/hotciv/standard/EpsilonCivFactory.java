@@ -30,4 +30,6 @@ public class EpsilonCivFactory implements HotCivFactory {
     {
         return new NullProductionStrategy();
     }
+
+    public CityPopulationStrategy createPopulationStrategy(){return new NullPopulationStrategy();}
 }

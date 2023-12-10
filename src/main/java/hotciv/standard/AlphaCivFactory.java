@@ -28,4 +28,6 @@ public class AlphaCivFactory implements HotCivFactory {
     {
         return new NullProductionStrategy();
     }
+
+    public CityPopulationStrategy createPopulationStrategy(){return new NullPopulationStrategy();}
 }

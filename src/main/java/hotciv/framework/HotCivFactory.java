@@ -13,4 +13,6 @@ public interface HotCivFactory {
     public AttackStrategy createAttackStrategy();
 
     public ProductionStrategy createProductionStrategy();
+
+    public CityPopulationStrategy createPopulationStrategy();
 }
