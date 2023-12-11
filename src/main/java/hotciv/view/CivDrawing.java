@@ -242,7 +242,7 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
     // TODO: Age output pending
-    
+    defineIcons();
   }
 
   public void tileFocusChangedAt(Position position) {
@@ -286,28 +286,19 @@ public class CivDrawing
       delegate.add(productionIcon);
 
     }
-
-
-
   }
 
-  @Override
-  public void requestUpdate() {
-    // A request has been issued to repaint
-    // everything. We simply rebuild the
-    // entire Drawing.
-    defineUnitMap();
-    defineIcons();
-    // TODO: Cities pending
+  public void defineCities()
+  {
     for(int i=0;i<GameConstants.WORLDSIZE;i++) {
-      for(int j=0;j<GameConstants.WORLDSIZE;j++) {
+      for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
 
-        Position coordinate = new Position(i,j);
+        Position coordinate = new Position(i, j);
 
         //check for newly built city
         City newCity = game.getCityAt(coordinate);
 
-        if(newCity != null) {
+        if (newCity != null) {
 
           //convert game coordinates into pixel coordinates
           Point cityPoint = new Point(GfxConstants.getXFromColumn(coordinate.getColumn()),
@@ -322,9 +313,17 @@ public class CivDrawing
         }
       }
     }
+  }
 
-
-
+  @Override
+  public void requestUpdate() {
+    // A request has been issued to repaint
+    // everything. We simply rebuild the
+    // entire Drawing.
+    defineUnitMap();
+    defineIcons();
+    // TODO: Cities pending
+    defineCities();
   }
 
   @Override
