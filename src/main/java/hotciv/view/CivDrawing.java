@@ -242,10 +242,7 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
     // TODO: Age output pending
-    if(playername == "blue")
-    {
-
-    }
+    
   }
 
   public void tileFocusChangedAt(Position position) {

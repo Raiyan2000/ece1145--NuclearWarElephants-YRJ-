@@ -200,7 +200,7 @@ public class TestEtaCiv {
     }
 
     @Test
-    public void TestFoodResetToZero() {
+    public void TestPopulationDoesNotIncreasePast9() {
         // Set the city and Check for city in correct position
         ((GameImpl)game).test_setCityPosition(new Position(1,1), Player.RED);
         assertThat(game.getCityAt(new Position(1,1)), is(notNullValue()));
