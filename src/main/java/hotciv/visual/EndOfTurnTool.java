@@ -26,7 +26,7 @@ public class EndOfTurnTool extends AbstractTool implements Tool {
 
         editor().drawing().lock();
 
-        if(x == GfxConstants.TURN_SHIELD_X && y == GfxConstants.TURN_SHIELD_Y)
+        if(x >= GfxConstants.TURN_SHIELD_X && x<=GfxConstants.TURN_SHIELD_X+GfxConstants.TILESIZE && y >= GfxConstants.TURN_SHIELD_Y && y<= GfxConstants.TURN_SHIELD_Y+GfxConstants.TILESIZE)
         {
             game.endOfTurn();
         }

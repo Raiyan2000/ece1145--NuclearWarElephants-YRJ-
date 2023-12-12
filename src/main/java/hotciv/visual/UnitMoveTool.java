@@ -1,12 +1,16 @@
 package hotciv.visual;
 
 import hotciv.framework.City;
+import hotciv.framework.Game;
 import hotciv.framework.Position;
 import hotciv.framework.Unit;
 import hotciv.standard.GameImpl;
 import hotciv.standard.TileImpl;
+import hotciv.view.GfxConstants;
 import minidraw.framework.*;
 import minidraw.standard.AbstractTool;
+import minidraw.standard.NullTool;
+import minidraw.standard.handlers.DragTracker;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -15,88 +19,100 @@ public class UnitMoveTool extends AbstractTool implements Tool
 {
         protected Figure selectedFigure;
 
-        protected GameImpl game;
-
         private Position initialSelectPosition;
+        protected Tool fChild;
 
-        private DrawingEditor message;
+        protected Tool cachedNullTool;
 
-        public UnitMoveTool(DrawingEditor editor)
+        private Game game;
+
+        private int initialXPixel;
+
+        private int initialYPixel;
+
+        public UnitMoveTool(DrawingEditor editor, Game game)
         {
             super(editor);
+            fChild = cachedNullTool = new NullTool();
+            this.game = game;
+            selectedFigure = null;
+            initialSelectPosition = null;
+            initialXPixel = 0;
+            initialYPixel = 0;
         }
 
         public void mouseDown(MouseEvent e, int x, int y)
         {
+
             Drawing model = editor().drawing();
+
             model.lock();
 
-            //obtains the figure selected
             selectedFigure = model.findFigure(e.getX(), e.getY());
 
-            //get position coordinates
-            Position clickedPosition = new Position(x,y);
+            if (selectedFigure != null) {
+                fChild = createDragTracker(selectedFigure);
 
-            //see what type of object is being clicked on
-            Unit clickedUnit = game.getUnitAt(clickedPosition);
-            City clickedCity = game.getCityAt(clickedPosition);
+                Unit clickedUnit = game.getUnitAt(GfxConstants.getPositionFromXY(x,y));
 
-            if(selectedFigure != null && e.isShiftDown())
-            {
-                initialSelectPosition = new Position(x,y);
-            }
-            else if(selectedFigure != null && !e.isShiftDown())
-            {
-                //a city is clicked on, so display city stats
-                if(clickedCity != null)
+                if(clickedUnit != null)
                 {
-
+                    System.out.println("Unit Present");
+                    fChild = createDragTracker( selectedFigure );
+                    Position temp = GfxConstants.getPositionFromXY(x,y);
+                    initialSelectPosition = new Position(temp.getRow(), temp.getColumn());
+                    initialXPixel = x;
+                    initialYPixel = y;
                 }
-
-                //a unit is being clicked, so display unit stats
-                if (clickedCity != null)
-                {
-                    String cityOwner = clickedCity.getOwner().toString();
-                    String cityFocus = clickedCity.getWorkforceFocus();
-                    String cityProduce = clickedCity.getProduction();
-                    String cityPopulate = Integer.toString(clickedCity.getSize());
-
-                    message.showStatus("Owner: "+cityOwner+"Focus: "+cityFocus+"Production: "+cityProduce+"Population: "+cityPopulate);
-                }
+            } else {
+                System.out.println("No figure");
             }
-            else
-            {
-                model.clearSelection();
-            }
+
+            fChild.mouseDown(e,x,y);
+
         }
 
         public void mouseDrag(MouseEvent e, int x, int y)
         {
-            return;
+           fChild.mouseDrag(e, x, y);
         }
 
         public void mouseUp(MouseEvent e, int x, int y)
         {
             editor().drawing().unlock();
 
-            if(selectedFigure != null)
-            {
-                Unit selectedUnit = game.getUnitAt(initialSelectPosition);
-
-                if(selectedUnit != null)
+            if(selectedFigure != null && initialSelectPosition != null) {
+                //call moveUnit function
+                System.out.println("Call unit move function");
+                Position to = GfxConstants.getPositionFromXY(x,y);
+                Position movedTo = new Position(to.getRow(),to.getColumn());
+                boolean canMove = game.moveUnit(initialSelectPosition, movedTo);
+                if(canMove)
                 {
-                    Position to = new Position(x,y);
-                    boolean canMove = game.moveUnit(initialSelectPosition,to);
+                    System.out.println("can move");
+                }
+                else
+                {
+                    selectedFigure.moveBy(initialXPixel - x,initialYPixel - y);
+                    System.out.println("Cant move");
                 }
             }
+
+            fChild.mouseUp(e, x, y);
+            fChild = cachedNullTool;
+            selectedFigure = null;
         }
         public void mouseMove(MouseEvent e, int x, int y)
         {
-            return;
+            fChild.mouseMove(e,x,y);
         }
         public void keyDown(KeyEvent e, int key)
         {
             return;
+        }
+
+        protected Tool createDragTracker(Figure f) {
+            return new DragTracker(editor(), f);
         }
 
 }

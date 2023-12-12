@@ -27,9 +27,12 @@ public class ActionTool extends AbstractTool implements Tool {
 
         editor().drawing().lock();
 
-        //get unit at mouse clicked position
-        game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
-        //guiUpdate.tileFocusChangedAt(mousePosition);
+        //locate unit
+        Unit clickedOnUnit = game.getUnitAt(GfxConstants.getPositionFromXY(x,y));
+
+        if(e.isShiftDown() && clickedOnUnit != null) {
+            game.performUnitActionAt(GfxConstants.getPositionFromXY(x, y));
+        }
     }
 
     @Override

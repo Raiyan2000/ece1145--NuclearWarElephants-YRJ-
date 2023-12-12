@@ -357,16 +357,19 @@ public class GameImpl implements Game {
     if(currUnit.getTypeString().equals(GameConstants.SETTLER))
     {
       UnitMovement.SettlerUnitAction(world_board,p,currUnit);
+      civGameObserver.worldChangedAt(p);
     }
 
     if(currUnit.getTypeString().equals(GameConstants.ARCHER))
     {
       UnitMovement.ArcherUnitAction(currUnit);
+      civGameObserver.worldChangedAt(p);
     }
 
     if(currUnit.getTypeString().equals(GameConstants.UFO))
     {
       UnitMovement.ufoUnitAction(world_board,p,currUnit);
+      civGameObserver.worldChangedAt(p);
     }
   }
 

@@ -1,6 +1,7 @@
 package hotciv.stub;
 
 import hotciv.framework.*;
+import hotciv.standard.TileImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +43,8 @@ public class StubGame2 implements Game {
   private Position pos_settler_red;
   private Position pos_ufo_red;
 
+  private Position pos_city_blue;
+
   private Unit red_archer;
 
   public Unit getUnitAt(Position p) {
@@ -63,13 +66,31 @@ public class StubGame2 implements Game {
   // Stub only allows moving red archer
   public boolean moveUnit( Position from, Position to ) { 
     System.out.println( "-- StubGame2 / moveUnit called: "+from+"->"+to );
-    if ( from.equals(pos_archer_red) ) {
-      pos_archer_red = to;
+
+    if(from.equals(pos_settler_red))
+    {
+      int rowDistance = Math.abs(to.getRow()- from.getRow());
+      int colDistance = Math.abs(to.getColumn() - from.getColumn());
+      double totalDistance = Math.sqrt(colDistance*colDistance + rowDistance*rowDistance);
+      System.out.println(totalDistance);
+      if(totalDistance>0 && totalDistance<=Math.sqrt(2) && to.getColumn()>=0 && to.getRow()<=15 && from.getColumn()>=0 && from.getRow()<=15)
+      {
+        System.out.println("reaches game observer function");
+
+        pos_settler_red = new Position(to.getRow(),to.getColumn());
+
+        gameObserver.worldChangedAt(from);
+        gameObserver.worldChangedAt(to);
+
+        return true;
+      }
+
+      return false;
     }
-    // notify our observer(s) about the changes on the tiles
-    gameObserver.worldChangedAt(from);
-    gameObserver.worldChangedAt(to);
-    return true; 
+    else
+    {
+      return false;
+    }
   }
 
   // === Turn handling ===
@@ -100,8 +121,10 @@ public class StubGame2 implements Game {
     pos_settler_red = new Position( 4, 3);
     pos_ufo_red = new Position( 6, 4);
 
+    pos_city_blue = new Position(7,8);
+
     // the only one I need to store for this stub
-    red_archer = new StubUnit( GameConstants.ARCHER, Player.RED );   
+    red_archer = new StubUnit( GameConstants.ARCHER, Player.RED );
 
     inTurn = Player.RED;
   }
@@ -126,12 +149,21 @@ public class StubGame2 implements Game {
   }
 
   // TODO: Add more stub behaviour to test MiniDraw updating
-  public City getCityAt( Position p ) { return null; }
+  public City getCityAt( Position p ) {
+    return null;
+  }
+
   public Player getWinner() { return null; }
   public int getAge() { return 0; }  
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
-  public void performUnitActionAt( Position p ) {}  
+  public void performUnitActionAt( Position p )
+  {
+    if(p.equals(pos_settler_red))
+    {
+      return;
+    }
+  }
 
   public void setTileFocus(Position position) {
     // TODO: setTileFocus implementation pending.

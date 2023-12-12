@@ -1,5 +1,6 @@
 package hotciv.stub;
 
+import hotciv.framework.City;
 import hotciv.framework.Tile;
 
 /** Implementation of Tile for the stub.
@@ -30,9 +31,22 @@ import hotciv.framework.Tile;
 
 
 public class StubTile implements Tile {
+
+  City myCity;
   private String type;
   public StubTile(String type) {
     this.type = type;
+    this.myCity = null;
   }
+
+  public void setMyCity(City myCity) {
+    this.myCity = myCity;
+  }
+
+  public City getMyCity() {
+    return myCity;
+  }
+
+
   public String getTypeString() { return type; }
 }
