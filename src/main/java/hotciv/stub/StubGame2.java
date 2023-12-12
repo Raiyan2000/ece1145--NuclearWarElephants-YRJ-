@@ -161,7 +161,9 @@ public class StubGame2 implements Game {
   {
     if(p.equals(pos_settler_red))
     {
-      return;
+      Tile square = world.get(p);
+      ((TileImpl)square).setCityOwner(Player.RED);
+      gameObserver.worldChangedAt(p);
     }
   }
 
