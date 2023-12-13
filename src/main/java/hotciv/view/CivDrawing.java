@@ -289,9 +289,7 @@ public class CivDrawing
         unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
         delegate.add(unitShieldIcon);
 
-        //adds the red player city shield icon onto map
-        cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
-        delegate.add(cityShieldIcon);
+        delegate.remove(cityShieldIcon);
       }
       else
       {
@@ -299,65 +297,41 @@ public class CivDrawing
         unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
         delegate.add(unitShieldIcon);
 
-        //blue city shield
-        cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
-        delegate.add(cityShieldIcon);
+        delegate.remove(cityShieldIcon);
       }
     }
 
     if(changedCity != null)
     {
-      System.out.println("Reaches Changed City");
-      if(changedCity.getWorkforceFocus().equals(GameConstants.productionFocus))
-      {
-        workforceFocusIcon = new ImageFigure("hammer",new Point(GfxConstants.WORKFORCEFOCUS_X,GfxConstants.WORKFORCEFOCUS_Y));
-      }
-      else
-      {
-        workforceFocusIcon = new ImageFigure("apple",new Point(GfxConstants.WORKFORCEFOCUS_X,GfxConstants.WORKFORCEFOCUS_Y));
-      }
-      delegate.add(workforceFocusIcon);
-
-      if(changedCity.getProduction().equals(GameConstants.LEGION))
-      {
-        productionIcon = new ImageFigure("legion",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
-      }
-      else if(changedCity.getProduction().equals(GameConstants.SETTLER))
-      {
-        productionIcon = new ImageFigure("settler",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
-      }
-      else
-      {
-        productionIcon = new ImageFigure("archer",new Point(GfxConstants.CITY_PRODUCTION_X,GfxConstants.CITY_PRODUCTION_Y));
-      }
-      delegate.add(productionIcon);
 
       Player cityOwner = game.getCityAt(position).getOwner();
 
       if(cityOwner.equals(Player.RED))
       {
-        //adds the red player unit shield icon onto map
-        unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
-        delegate.add(unitShieldIcon);
-
         //adds the red player city shield icon onto map
         cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
         delegate.add(cityShieldIcon);
+
+        delegate.remove(unitShieldIcon);
       }
       else
       {
-        //blue unit shield
-        unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
-        delegate.add(unitShieldIcon);
-
         //blue city shield
         cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
         delegate.add(cityShieldIcon);
+
+        delegate.remove(unitShieldIcon);
       }
 
       TextFigure movesLeft = new TextFigure("0", new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
       delegate.add(movesLeft);
 
+    }
+
+    if(changedCity == null && changedUnit == null)
+    {
+      delegate.remove(unitShieldIcon);
+      delegate.remove(cityShieldIcon);
     }
   }
 
