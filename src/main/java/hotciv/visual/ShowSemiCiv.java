@@ -12,7 +12,7 @@ import minidraw.standard.MiniDrawApplication;
 public class ShowSemiCiv {
     public static void main(String[] args) {
 
-        HotCivFactory alphaCiv = new AlphaCivFactory();
+        HotCivFactory alphaCiv = new SemiCivFactory();
 
         Game game = new GameImpl(alphaCiv);
 

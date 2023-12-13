@@ -63,6 +63,7 @@ public class CivDrawing
     this.delegate = new StandardDrawing();
     this.game = game;
     this.unitFigureMap = new HashMap<>();
+    this.unitCityMap = new HashMap<>();
 
     // register this unit drawing as listener to any game state
     // changes...
@@ -122,6 +123,26 @@ public class CivDrawing
           delegate.add(unitFigure);
         }
 
+        Position coordinate = new Position(r, c);
+
+        //check for newly built city
+        City newCity = game.getCityAt(coordinate);
+
+        if (newCity != null) {
+
+          //convert game coordinates into pixel coordinates
+          Point cityPoint = new Point(GfxConstants.getXFromColumn(coordinate.getColumn()),
+                  GfxConstants.getYFromRow(coordinate.getRow()));
+
+          //create a city object
+          CityFigure cityFig = new CityFigure(newCity, cityPoint);
+
+          //add city onto the game map
+          cityFig.addFigureChangeListener(this);
+          unitCityMap.put(newCity, cityFig);
+
+          delegate.add(cityFig);
+        }
       }
     }
 

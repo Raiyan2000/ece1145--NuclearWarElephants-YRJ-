@@ -24,7 +24,7 @@ public class SemiCivFactory implements HotCivFactory {
         return new ThreeAttackWinner();
     }
 
-    public AttackStrategy createAttackStrategy(){return new EpsilonAttack();}
+    public AttackStrategy createAttackStrategy(){return new AttackerWinsAttack();}
 
     public ProductionStrategy createProductionStrategy()
     {

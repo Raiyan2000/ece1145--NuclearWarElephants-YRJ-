@@ -42,5 +42,16 @@ public class DeltaCivWorld implements WorldLayout {
         //Set city owners and city objects
         ((TileImpl)board[8][12]).setCityOwner(Player.RED);
         ((TileImpl)board[4][5]).setCityOwner(Player.BLUE);
+
+        //Red has one archer and settler
+        UnitImpl archer = new UnitImpl(GameConstants.ARCHER, Player.RED);
+        UnitImpl settler = new UnitImpl(GameConstants.SETTLER, Player.RED);
+
+        //Blue has one Legion
+        UnitImpl legion = new UnitImpl(GameConstants.LEGION, Player.BLUE);
+
+        board[2][0].setUnitType(archer);
+        board[3][2].setUnitType(legion);
+        board[4][3].setUnitType(settler);
     }
 }
