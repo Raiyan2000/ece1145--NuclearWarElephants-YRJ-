@@ -47,6 +47,12 @@ public class StubGame2 implements Game {
 
   private Unit red_archer;
 
+  private City createdCity;
+
+  private UnitActionStrategy strategyAction;
+
+  private TileImpl[][] board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+
   public Unit getUnitAt(Position p) {
     if ( p.equals(pos_archer_red) ) {
       return red_archer;
@@ -159,10 +165,24 @@ public class StubGame2 implements Game {
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p )
   {
-    if(p.equals(pos_settler_red))
+    //obtains unit present at the current tile
+    Unit currUnit = board[p.getRow()][p.getColumn()].getUnit();
+
+    if(currUnit.getTypeString().equals(GameConstants.SETTLER))
     {
-      Tile square = world.get(p);
-      ((TileImpl)square).setCityOwner(Player.RED);
+      strategyAction.SettlerUnitAction(board,p,currUnit);
+      gameObserver.worldChangedAt(p);
+    }
+
+    if(currUnit.getTypeString().equals(GameConstants.ARCHER))
+    {
+      strategyAction.ArcherUnitAction(currUnit);
+      gameObserver.worldChangedAt(p);
+    }
+
+    if(currUnit.getTypeString().equals(GameConstants.UFO))
+    {
+      strategyAction.ufoUnitAction(board,p,currUnit);
       gameObserver.worldChangedAt(p);
     }
   }

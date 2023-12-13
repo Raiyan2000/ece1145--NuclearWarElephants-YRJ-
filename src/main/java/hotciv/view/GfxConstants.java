@@ -51,7 +51,7 @@ public class GfxConstants {
   // === Constants that define positions for props on the gfx display
   public final static int TURN_SHIELD_X = 559;
   public final static int TURN_SHIELD_Y = 64;
-  public final static int AGE_TEXT_X = 510;
+  public final static int AGE_TEXT_X = 535;
   public final static int AGE_TEXT_Y = 23;
   
   public final static int UNIT_SHIELD_X = 594;

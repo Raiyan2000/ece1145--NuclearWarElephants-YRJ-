@@ -121,8 +121,10 @@ public class CivDrawing
           // graphics rendering algorithms
           delegate.add(unitFigure);
         }
+
       }
     }
+
   }
 
   /** remove all unit figures in this
@@ -190,6 +192,7 @@ public class CivDrawing
     int age = game.getAge();
 
     //checks if age should be BC or AD
+    delegate.remove(ageIcon);
     if(age>0) {
       String year = Integer.toString(game.getAge()); //obtain Age of Game
       ageIcon = new TextFigure(year+" AD", new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
@@ -310,6 +313,8 @@ public class CivDrawing
           //add city onto the game map
           cityFig.addFigureChangeListener(this);
           unitCityMap.put(newCity, cityFig);
+
+          delegate.add(cityFig);
         }
       }
     }

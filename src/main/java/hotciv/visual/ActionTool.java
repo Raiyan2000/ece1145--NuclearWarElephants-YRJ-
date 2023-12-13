@@ -33,6 +33,8 @@ public class ActionTool extends AbstractTool implements Tool {
         if(e.isShiftDown() && clickedOnUnit != null) {
             game.performUnitActionAt(GfxConstants.getPositionFromXY(x, y));
         }
+
+
     }
 
     @Override
