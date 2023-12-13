@@ -51,7 +51,7 @@ public class StubGame2 implements Game {
 
   private UnitActionStrategy strategyAction;
 
-  private TileImpl[][] board = new TileImpl[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+
 
   public Unit getUnitAt(Position p) {
     if ( p.equals(pos_archer_red) ) {
@@ -133,6 +133,7 @@ public class StubGame2 implements Game {
     red_archer = new StubUnit( GameConstants.ARCHER, Player.RED );
 
     inTurn = Player.RED;
+
   }
 
   // A simple implementation to draw the map of DeltaCiv
@@ -161,12 +162,18 @@ public class StubGame2 implements Game {
 
   public Player getWinner() { return null; }
   public int getAge() { return 0; }  
-  public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
-  public void changeProductionInCityAt( Position p, String unitType ) {}
+  public void changeWorkForceFocusInCityAt( Position p, String balance )
+  {
+
+  }
+  public void changeProductionInCityAt( Position p, String unitType )
+  {
+
+  }
   public void performUnitActionAt( Position p )
   {
-    //obtains unit present at the current tile
-    Unit currUnit = board[p.getRow()][p.getColumn()].getUnit();
+    /*obtains unit present at the current tile
+    //Unit currUnit = board[p.getRow()][p.getColumn()].getUnit();
 
     if(currUnit.getTypeString().equals(GameConstants.SETTLER))
     {
@@ -184,7 +191,7 @@ public class StubGame2 implements Game {
     {
       strategyAction.ufoUnitAction(board,p,currUnit);
       gameObserver.worldChangedAt(p);
-    }
+    }*/
   }
 
   public void setTileFocus(Position position) {

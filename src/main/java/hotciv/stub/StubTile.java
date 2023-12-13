@@ -1,7 +1,9 @@
 package hotciv.stub;
 
 import hotciv.framework.City;
+import hotciv.framework.Player;
 import hotciv.framework.Tile;
+import hotciv.standard.CityImpl;
 
 /** Implementation of Tile for the stub.
    This source code is from the book 
@@ -39,14 +41,14 @@ public class StubTile implements Tile {
     this.myCity = null;
   }
 
-  public void setMyCity(City myCity) {
-    this.myCity = myCity;
-  }
-
   public City getMyCity() {
     return myCity;
   }
 
+  public void setCityOwner(Player name){
+    City temp_city = new CityImpl(name, null);
+    this.myCity = temp_city;
+  }
 
   public String getTypeString() { return type; }
 }
