@@ -171,6 +171,8 @@ public class CivDrawing
   protected ImageFigure unitInfoIcon;
   protected ImageFigure workforceFocusIcon;
 
+  protected TextFigure movesLeft;
+
   protected void defineIcons() {
 
     if(game.getPlayerInTurn() == Player.RED) {
@@ -183,12 +185,12 @@ public class CivDrawing
       delegate.add(turnShieldIcon);
 
       //adds the red player unit shield icon onto map
-      unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
-      delegate.add(unitShieldIcon);
+      //unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
+      //delegate.add(unitShieldIcon);
 
       //adds the red player city shield icon onto map
-      cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
-      delegate.add(cityShieldIcon);
+      //cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
+      //delegate.add(cityShieldIcon);
     }
     else
     {
@@ -197,12 +199,12 @@ public class CivDrawing
       delegate.add(turnShieldIcon);
 
       //blue unit shield
-      unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
-      delegate.add(unitShieldIcon);
+      //unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
+      //delegate.add(unitShieldIcon);
 
       //blue city shield
-      cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
-      delegate.add(cityShieldIcon);
+      //cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
+      //delegate.add(cityShieldIcon);
     }
 
     //add refresh button onto the game
@@ -279,13 +281,21 @@ public class CivDrawing
 
     //puts number of moves onto the display screen on right side
     if(changedUnit != null) {
-      TextFigure movesLeft = new TextFigure(Integer.toString(changedUnit.getMoveCount()), new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
+      if(movesLeft != null)
+      {
+        delegate.remove(movesLeft);
+      }
+      movesLeft = new TextFigure(Integer.toString(changedUnit.getMoveCount()), new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
       delegate.add(movesLeft);
       Player unitOwner = game.getUnitAt(position).getOwner();
 
       if(unitOwner.equals(Player.RED))
       {
         //adds the red player unit shield icon onto map
+        if(unitShieldIcon != null)
+        {
+          delegate.remove(unitShieldIcon);
+        }
         unitShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
         delegate.add(unitShieldIcon);
 
@@ -294,6 +304,11 @@ public class CivDrawing
       else
       {
         //blue unit shield
+        if(unitShieldIcon != null)
+        {
+          delegate.remove(unitShieldIcon);
+        }
+
         unitShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.UNIT_SHIELD_X,GfxConstants.UNIT_SHIELD_Y));
         delegate.add(unitShieldIcon);
 
@@ -309,6 +324,10 @@ public class CivDrawing
       if(cityOwner.equals(Player.RED))
       {
         //adds the red player city shield icon onto map
+        if(cityShieldIcon != null)
+        {
+          delegate.remove(cityShieldIcon);
+        }
         cityShieldIcon = new ImageFigure("redshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
         delegate.add(cityShieldIcon);
 
@@ -317,13 +336,19 @@ public class CivDrawing
       else
       {
         //blue city shield
+        if(cityShieldIcon != null)
+        {
+          delegate.remove(cityShieldIcon);
+        }
+
         cityShieldIcon = new ImageFigure("blueshield",new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
         delegate.add(cityShieldIcon);
 
         delegate.remove(unitShieldIcon);
       }
 
-      TextFigure movesLeft = new TextFigure("0", new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
+      delegate.remove(movesLeft);
+      movesLeft = new TextFigure("0", new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
       delegate.add(movesLeft);
 
     }
@@ -332,6 +357,14 @@ public class CivDrawing
     {
       delegate.remove(unitShieldIcon);
       delegate.remove(cityShieldIcon);
+
+      if(movesLeft != null)
+      {
+        delegate.remove(movesLeft);
+      }
+
+      movesLeft = new TextFigure("0", new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
+      delegate.add(movesLeft);
     }
   }
 

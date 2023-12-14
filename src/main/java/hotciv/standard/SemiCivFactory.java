@@ -11,7 +11,7 @@ public class SemiCivFactory implements HotCivFactory {
 
     public UnitActionStrategy createUnitActionStrategy()
     {
-        return new UnitActionAlpha();
+        return new ThetaCivUnitAction();
     }
 
     public WorldAgeStrategy createWorldAgeStrategy()
