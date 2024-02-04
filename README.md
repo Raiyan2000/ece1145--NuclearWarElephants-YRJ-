@@ -17,7 +17,7 @@ HotCiv is a simple Civilization-style game that is used to demonstrate various s
 * IntelliJ: JUnit tool used for unit testing
 # Results and Design Patterns 
 * Code Coverage: 93%
-* Design Patterns Utilised:
+* Design Patterns Utilized:
   * Compositional Design
   * STRATEGY Design
   * Abstract Factory
@@ -26,7 +26,7 @@ HotCiv is a simple Civilization-style game that is used to demonstrate various s
   * Systematic testing
   * Unit-testing
 * MiniDraw framework integrated and utilized by project
-# Quick start
+# Quick Start
 Clone the repository:
 ```
 git clone https://github.com/Raiyan2000/ece1145--NuclearWarElephants-YRJ-.git
