@@ -1,4 +1,4 @@
-# HotCiv
+# HotCiv: Demonstrating Software Design Patterns and Principles with Test-Driven Development (TDD)
 HotCiv is a Civilization-style game designed to showcase various software design patterns and principles using Test-Driven Development (TDD). This project aims to provide insights into software development processes, software evolution, and maintaining high software quality standards.
 # 🚀 Motivation
 HotCiv was developed to address key questions in software development, such as:
